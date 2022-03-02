@@ -1,0 +1,43 @@
+@startuml Codecouleur
+left to right direction
+skinparam actorStyle awesome
+skinparam BackgroundColor #DarkCyan
+package Personnesurlesite #Grey {
+actor Admin as ADMIN #Black
+actor SuperAdmin as SUPADMIN #WhiteSmoke
+}
+
+
+Rectangle Quidideance #DarkGrey {
+
+    ("Surfer sur le site") as SURF
+    ("Admin") as ADM 
+    ("Créer un admin") as ADMNEW
+    ("Modifier un admin") as ADMEDIT
+    ("Supprimer un admin") as ADMDELETE
+    ("Voir un admin") as ADMSHOW
+    ("Question") as QUE
+    ("Créer une question") as QUENEW
+    ("Modifier une question") as QUEEDIT
+    ("Supprimer une question") as QUEDELETE
+    ("Voir une question") as QUESHOW
+
+    SUPADMIN----->ADM #WhiteSmoke
+    ADM--->ADMNEW #WhiteSmoke
+    ADM--->ADMEDIT #WhiteSmoke
+    ADM--->ADMDELETE #WhiteSmoke
+    ADM--->ADMNEW #WhiteSmoke
+
+    
+    
+    
+    
+
+
+
+      
+    
+  
+}
+
+@enduml
