@@ -1,66 +1,59 @@
 @startuml Codecouleur
 left to right direction
 skinparam actorStyle awesome
-skinparam BackgroundColor #DarkCyan
-package Personnesurlesite #DarkGrey {
-actor Admin as ADMIN #Black
-actor SuperAdmin as SUPADMIN #WhiteSmoke
+skinparam backgroundcolor Grey/Black
+skinparam classBackgroundColor Wheat|CornflowerBlue
+package Administration #White{
+    actor Admin as ADMIN #Gold
+    actor SuperAdmin as SUPADMIN #WhiteSmoke
 }
 
 
 Rectangle Quidideance #DarkCyan {
 
-    ("Surfer sur le site") as SURF
+    ("Surfer sur le site") as SURF #White
     
-package Administrer #DarkGrey {
-    ("Administrer") as ADM #DarkSeaGreen
-    ("Créer un admin") as ADMNEW #DarkSeaGreen
-    ("Modifier un admin") as ADMEDIT #DarkSeaGreen
-    ("Supprimer un admin") as ADMDELETE #DarkSeaGreen
-    ("Voir un admin") as ADMSHOW #DarkSeaGreen
-}
-    
-package Interroger #DarkGrey {
+package Administrer #DarkSeaGreen/SeaGreen {
+    ("Administrer") as ADM #White
+    ("Créer un admin") as ADMNEW #White
+    ("Modifier un admin") as ADMEDIT #White
+    ("Supprimer un admin") as ADMDELETE #White
+    ("Voir un admin") as ADMSHOW #White
+}    
+package Interroger #RoyalBlue/LightBlue {
 
-    ("Interroger{poser une question}") as INT #RoyalBlue
-    ("Créer une question") as INTNEW #RoyalBlue
-    ("Modifier une question") as INTEDIT #RoyalBlue
-    ("Supprimer une question") as INTDELETE #RoyalBlue
-    ("Voir une question") as INTSHOW #RoyalBlue
+    ("Interroger{poser une question}") as INT #White
+    ("Créer une question") as INTNEW #White
+    ("Modifier une question") as INTEDIT #White
+    ("Supprimer une question") as INTDELETE #White
+    ("Voir une question") as INTSHOW #White
 }
-package Questionner #DarkGrey {
+package Questionner #Orange/OrangeRed {
 
-    ("Questionner {faire un questionnaire}") as QUE #Orange 
-    ("Créer un questionnaire") as QUENEW #Orange
-    ("Modifier un questionnaire") as QUEEDIT #Orange
-    ("Supprimer un questionnaire") as QUEDELETE #Orange
-    ("Voir un questionnaire") as QUESHOW #Orange
+    ("Questionner {faire un questionnaire}") as QUE #White
+    ("Créer un questionnaire") as QUENEW #White
+    ("Modifier un questionnaire") as QUEEDIT #White
+    ("Supprimer un questionnaire") as QUEDELETE #White
+    ("Voir un questionnaire") as QUESHOW #White
 }
-package Sonder #DarkGrey {
 
-    ("Sonder") as SON #ForestGreen
-    ("Créer un sondage") as SONNEW #ForestGreen
-    ("Modifier un sondage") as SONEDIT #ForestGreen
-    ("Supprimer un sondage") as SONDELETE #ForestGreen
-    ("Voir un sondage") as SONSHOW #ForestGreen
-}
-package Répondre #DarkGrey {
+package Répondre #Purple/MediumPurple {
 
-    ("Répondre") as REP #MediumPurple
-    ("Créer une réponse") as REPNEW #MediumPurple
-    ("Modifier une réponse") as REPEDIT #MediumPurple
-    ("Supprimer une réponse") as REPDELETE #MediumPurple
-    ("Voir une réponse") as REPSHOW #MediumPurple
+    ("Répondre") as REP #White
+    ("Créer une réponse") as REPNEW #White
+    ("Modifier une réponse") as REPEDIT #White
+    ("Supprimer une réponse") as REPDELETE #White
+    ("Voir une réponse") as REPSHOW #White
 }
-package Gérer #DarkGrey {
+package Gérer #LightCoral/DarkBlue {
 
     ("Gérer") as GER #WhiteSmoke
-    ("Modifier son compte") as GEREDIT #WhiteSmoke
-    ("Voir ses information") as GERSHOW #WhiteSmoke
+    ("Modifier son compte") as GEREDIT #White
+    ("Voir ses information") as GERSHOW #White
 }
-package Authentifier #DarkGrey {
-    ("Se connecter") as CON
-    ("Se déconnecter") as DEC
+package Authentifier #Grey/DarkGrey {
+    ("Se connecter") as CON #White
+    ("Se déconnecter") as DEC #White
 }
 
 
@@ -68,38 +61,33 @@ package Authentifier #DarkGrey {
 
 
 
-    ADMIN---|>SURF
-    ADMIN---|>CON
-    ADMIN---|>DEC
+    ADMIN--up-|>CON #Gold
+    ADMIN---|>DEC #Gold
+    ADMIN--|>SURF #Gold
 
 
-    ADMIN---|>QUE
-    QUE---|>QUENEW
-    QUE---|>QUEEDIT
-    QUE---|>QUEDELETE
-    QUE---|>QUESHOW
 
-    ADMIN---|>SON
-    SON---|>SONNEW
-    SON---|>SONEDIT
-    SON---|>SONDELETE
-    SON---|>SONSHOW
+    ADMIN---|>QUE #Gold 
+    QUE---|>QUENEW #Gold
+    QUE---|>QUEEDIT #Gold
+    QUE---|>QUEDELETE #Gold
+    QUE---|>QUESHOW #Gold   
 
-    ADMIN---|>INT
-    INT---|>INTNEW
-    INT---|>INTEDIT
-    INT---|>INTDELETE
-    INT---|>INTSHOW
+    ADMIN---|>INT #Gold
+    INT---|>INTNEW #Gold
+    INT---|>INTEDIT #Gold
+    INT---|>INTDELETE #Gold
+    INT---|>INTSHOW #Gold
 
-    ADMIN---|>REP
-    REP---|>REPNEW
-    REP---|>REPEDIT
-    REP---|>REPDELETE
-    REP---|>REPSHOW
+    ADMIN---|>REP #Gold
+    REP---|>REPNEW #Gold
+    REP---|>REPEDIT #Gold
+    REP---|>REPDELETE #Gold
+    REP---|>REPSHOW #Gold
 
-    ADMIN---|>GER
-    GER---|>GEREDIT
-    GER---|>GERSHOW
+    ADMIN---|>GER #Gold
+    GER---|>GEREDIT #Gold
+    GER---|>GERSHOW #Gold
 
     SUPADMIN----->ADM #WhiteSmoke
     ADM--->ADMNEW #WhiteSmoke
@@ -107,9 +95,12 @@ package Authentifier #DarkGrey {
     ADM--->ADMDELETE #WhiteSmoke
     ADM--->ADMSHOW #WhiteSmoke
 
-    QUENEW-..>INT : Include
-    SONNEW-..>INT : Include
-    INT<..-REP : Include
+    CON<.-DEC #White : Include
+    ADM-.>CON #White : Include
+    GER-.>CON #White : Include
+    QUENEW<..-INT #White : Include
+    INT<..-REP #White : Include
+    
     
     
     

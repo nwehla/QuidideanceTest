@@ -1,0 +1,21 @@
+Scénario:
+use case : contacter
+acteurs principal : user visiteur membre admin
+acteur secondaire : aucun 
+Objectif : contacter les administrateurs du site
+Pré-condition : serveur actif 
+Post-condition : envoie d'un message aux admins du site 
+Déclencheur : questions à poser, problèmes à résoudre
+
+Scénario Principal 
+1.L'acteur clique sur nous contacter.
+2.Affichage de la page nous contacter.
+3.L'utilisateur écrit un message dans un champ.
+4.L'utilisateur clique sur un bouton envoyer le message.
+5.Affichage d'un message "message envoyer".
+
+Scénari alternatifs
+1. Erreur serveur, affichage page d'erreur./Retour au scénario 1.
+4. Erreur lors de l'envoie du message :
+    1. Champ de saisi incorrect (vide, mal rempli) affichage d'un message "Veuillez remplir corriger ce(s) champ(s)"  
+    Retour sur le scénario 3.
