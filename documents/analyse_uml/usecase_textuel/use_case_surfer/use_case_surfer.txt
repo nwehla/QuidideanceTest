@@ -1,0 +1,14 @@
+Scénario:
+use case surfer
+acteurs principal : superAdmin, l'admin 
+acteur secondaire : aucun 
+Pré-condition : serveur actif ,mot de passe correct
+Post-condition : affichage de la page d'accueil 
+Déclencheur : aucun
+
+Scénario Principal 
+1 Le superAdmin ou l'admin après avoir validé son mot de passe
+peut naviguer sur l'entièreté de l'application.
+
+Scénari alternatifs
+1. Erreur serveur, affichage page d'erreur.

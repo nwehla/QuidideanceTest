@@ -2,32 +2,114 @@
 left to right direction
 skinparam actorStyle awesome
 skinparam BackgroundColor #DarkCyan
-package Personnesurlesite #Grey {
+package Personnesurlesite #DarkGrey {
 actor Admin as ADMIN #Black
 actor SuperAdmin as SUPADMIN #WhiteSmoke
 }
 
 
-Rectangle Quidideance #DarkGrey {
+Rectangle Quidideance #DarkCyan {
 
     ("Surfer sur le site") as SURF
-    ("Admin") as ADM 
-    ("Créer un admin") as ADMNEW
-    ("Modifier un admin") as ADMEDIT
-    ("Supprimer un admin") as ADMDELETE
-    ("Voir un admin") as ADMSHOW
-    ("Question") as QUE
-    ("Créer une question") as QUENEW
-    ("Modifier une question") as QUEEDIT
-    ("Supprimer une question") as QUEDELETE
-    ("Voir une question") as QUESHOW
+    
+package Administrer #DarkGrey {
+    ("Administrer") as ADM #DarkSeaGreen
+    ("Créer un admin") as ADMNEW #DarkSeaGreen
+    ("Modifier un admin") as ADMEDIT #DarkSeaGreen
+    ("Supprimer un admin") as ADMDELETE #DarkSeaGreen
+    ("Voir un admin") as ADMSHOW #DarkSeaGreen
+}
+    
+package Interroger #DarkGrey {
+
+    ("Interroger{poser une question}") as INT #RoyalBlue
+    ("Créer une question") as INTNEW #RoyalBlue
+    ("Modifier une question") as INTEDIT #RoyalBlue
+    ("Supprimer une question") as INTDELETE #RoyalBlue
+    ("Voir une question") as INTSHOW #RoyalBlue
+}
+package Questionner #DarkGrey {
+
+    ("Questionner {faire un questionnaire}") as QUE #Orange 
+    ("Créer un questionnaire") as QUENEW #Orange
+    ("Modifier un questionnaire") as QUEEDIT #Orange
+    ("Supprimer un questionnaire") as QUEDELETE #Orange
+    ("Voir un questionnaire") as QUESHOW #Orange
+}
+package Sonder #DarkGrey {
+
+    ("Sonder") as SON #ForestGreen
+    ("Créer un sondage") as SONNEW #ForestGreen
+    ("Modifier un sondage") as SONEDIT #ForestGreen
+    ("Supprimer un sondage") as SONDELETE #ForestGreen
+    ("Voir un sondage") as SONSHOW #ForestGreen
+}
+package Répondre #DarkGrey {
+
+    ("Répondre") as REP #MediumPurple
+    ("Créer une réponse") as REPNEW #MediumPurple
+    ("Modifier une réponse") as REPEDIT #MediumPurple
+    ("Supprimer une réponse") as REPDELETE #MediumPurple
+    ("Voir une réponse") as REPSHOW #MediumPurple
+}
+package Gérer #DarkGrey {
+
+    ("Gérer") as GER #WhiteSmoke
+    ("Modifier son compte") as GEREDIT #WhiteSmoke
+    ("Voir ses information") as GERSHOW #WhiteSmoke
+}
+package Authentifier #DarkGrey {
+    ("Se connecter") as CON
+    ("Se déconnecter") as DEC
+}
+
+
+    SUPADMIN--|> ADMIN : Généralisation Super admin à admin
+
+
+
+    ADMIN---|>SURF
+    ADMIN---|>CON
+    ADMIN---|>DEC
+
+
+    ADMIN---|>QUE
+    QUE---|>QUENEW
+    QUE---|>QUEEDIT
+    QUE---|>QUEDELETE
+    QUE---|>QUESHOW
+
+    ADMIN---|>SON
+    SON---|>SONNEW
+    SON---|>SONEDIT
+    SON---|>SONDELETE
+    SON---|>SONSHOW
+
+    ADMIN---|>INT
+    INT---|>INTNEW
+    INT---|>INTEDIT
+    INT---|>INTDELETE
+    INT---|>INTSHOW
+
+    ADMIN---|>REP
+    REP---|>REPNEW
+    REP---|>REPEDIT
+    REP---|>REPDELETE
+    REP---|>REPSHOW
+
+    ADMIN---|>GER
+    GER---|>GEREDIT
+    GER---|>GERSHOW
 
     SUPADMIN----->ADM #WhiteSmoke
     ADM--->ADMNEW #WhiteSmoke
     ADM--->ADMEDIT #WhiteSmoke
     ADM--->ADMDELETE #WhiteSmoke
-    ADM--->ADMNEW #WhiteSmoke
+    ADM--->ADMSHOW #WhiteSmoke
 
+    QUENEW-..>INT : Include
+    SONNEW-..>INT : Include
+    INT<..-REP : Include
     
     
     
