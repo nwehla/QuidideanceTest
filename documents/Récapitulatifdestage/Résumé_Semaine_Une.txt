@@ -1,0 +1,26 @@
+lundi 28 février  vendredi 4 mars
+
+Entretient entre Valéry, Fabrice et Sebatien Delorme
+
+    Résumé de l'entretient :
+
+    Mr Delorme aimerait une application qui compare des couleurs
+    et donne un ratio de contraste aux normes W3C. L'utilisateur 
+    choisira au minimum deux couleurs au maximum 5 à 10 couleurs.
+    Il en ressorita un tableau des couleurs séléctionnées. Le site
+    devra fournir un ratio. Dans un second temps l'utilisateur devra
+     entré la taille d'écriture désirée. Avec tous ces éléments le site
+      devra dire si l'ensemble correspond aux normes W3C.
+
+Pour la première semaine de prise de contact avec Mr Delorme, nous avons planchés sur un cahier des charges et un début d'analyse de l'application avec mon collègue.
+Lors des trois premiers jours nous avons mis en place un dictionnaire de données, et rédigé une esquisse d'un cahier des charges. Il fut présenté à notre tuteur de stage,
+pour voir si cela correspondait à ces attentes. Le feedback était bon et nous avons décidés de commencer notre analyse UML. Pendant ces deux jours nous avons donc
+débutés la construction du projet, desdossiers suivants :
+    - Diagramme de classe
+    - Diagramme de use case
+    - Use case textuel
+    - Use case général (visible en PlantUML)
+
+En fin de semaine après avoir fait un point avec notre tuteur, il s'est avéré que la consistance du projet ne nous permettait pas
+de le présenter pour notre examen de fin d'étude. D'un accord commun nous avons décidés de changer de projet. Mr Delorme nous a donc présenté
+une application basée sur des sondages. 
