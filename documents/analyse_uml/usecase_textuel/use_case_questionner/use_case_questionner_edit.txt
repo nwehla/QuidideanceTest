@@ -1,27 +1,22 @@
 Scénario:
-use case connexion
+use case questionner_edit
 acteurs principal : SuperAdmin , admin
 acteur secondaire : aucun 
-Objectif : Se connecter à l'application
-Pré-condition : Etre inscrit sur le site
-Post-condition : Surfer sur le site
-Déclencheur : Authentification
+Objectif : modification d'une question
+Pré-condition : Etre SuperAdmin ou admin
+Post-condition : Question à modifier
+Déclencheur : clique sur le lien de modification
 
 Scénario Principal 
-1. Le SuperAdmin ou l'Admin clique sur le bouton Authentification.
-2. Il entre son email et son mot de passe.
-3. Il valide en cliquant sur le bouton Authentification.
-    -Lors de la première connexion au site, il sera dirigé 
-    vers la page de modification de mot passe, pour changer
-    de mot de passe.
-4. Accès à la page d'accueil du site.
+1. Le SuperAdmin ou l'Admin choisit la question à modifier 
+ et clique sur le bouton modifier la question.
+-Redirection vers le formulaire de modification
+-(affichage d'un méssage="modification éffectuée avec succes" ). 
+-retour à la page du questionnaire.
 
 Scénari alternatifs
-1. Erreur serveur, retour a page d'accueil.
-2. Erreur lors de la saisie de ses identifiants/Message d'erreur "Veuillez remplir corriger ce(s) champ(s)"
-Retour au scénario 2.
-3.Mot de passe oublié , envoie d'un lien de récupération de mot de passe.
-4. Erreur serveur, retour a page d'accueil.
-Retour au scénario 1.
+1. Erreur serveur, retour a page du questionnaire.
+-(affichage d'un méssage="Erreur de suppréssion veuillez recommencer").
+-retour à la page du questionnaire.
 
 
