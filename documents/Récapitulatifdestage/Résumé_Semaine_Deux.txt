@@ -1,1 +1,15 @@
 Lundi 7 mars vendrdi 11 mars
+
+Mise en place des outils de plannification pour le
+projet. Nous avons mis en place un  fichier de suivi
+d'activités semaine par semaine avec des objectifs à atteindre.
+Nous avons également mis en place un outil de gestion de projet
+en ligne via l'application Trello.
+La mise en place du planning via Trello donnera une visibilité
+quotidienne du projet tâche par tâche.
+Une invitation a été faite à notre formateur et notre tuteur de stage.
+
+Nous avons appotés quelques modifications dans notre descriptif 
+d'application.
+
+
