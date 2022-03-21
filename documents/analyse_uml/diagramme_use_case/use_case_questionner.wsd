@@ -1,0 +1,67 @@
+@startuml Codecouleur
+left to right direction
+skinparam actorStyle awesome
+skinparam backgroundcolor Grey/Black
+skinparam classBackgroundColor Wheat|CornflowerBlue
+package Administration #White{
+    actor Admin as ADMIN #Gold
+    actor SuperAdmin as SUPADMIN #WhiteSmoke
+}
+
+
+Rectangle Quidideance #DarkCyan {
+
+ 
+package Interroger #RoyalBlue/LightBlue {
+
+    ("Créer une question") as INTNEW #White
+    ("Modifier une question") as INTEDIT #White
+    ("Supprimer une question") as INTDELETE #White
+}
+package Questionner #Orange/OrangeRed {
+
+    ("Créer un questionnaire") as QUENEW #White
+    ("Modifier un questionnaire") as QUEEDIT #White 
+    ("Supprimer un questionnaire") as QUEDELETE #White
+    ("Voir un questionnaire") as QUESHOW #White
+}
+
+package Répondre #Purple/MediumPurple {
+
+    ("Créer une réponse") as REPNEW #White
+    ("Modifier une réponse") as REPEDIT #White
+    ("Supprimer une réponse") as REPDELETE #White
+}
+
+    SUPADMIN--|> ADMIN : Généralisation Super admin à admin
+
+    ADMIN--->QUENEW #Black : un admin ne pourra que créer son questionnaire
+    QUENEW-..>QUEEDIT #Black : un admin ne pourra que modifier son questionnaire
+    QUENEW-..>QUEDELETE #Black : un admin ne pourra que supprimer son questionnaire
+    QUENEW-..>QUESHOW #Black   
+
+    ADMIN--->INTNEW #Black
+    INTNEW-..>INTEDIT #Black : Include
+    INTNEW-..>INTDELETE #Black : Include
+  
+
+    ADMIN--->REPNEW #Black
+    REPNEW-..>REPEDIT #Black : Include
+    REPNEW-..>REPDELETE #Black : Include
+    
+    QUENEW<..-INTNEW #Black : Include
+    INTNEW<..-REPNEW #Black : Include
+    
+    
+    
+    
+    
+
+
+
+      
+    
+  
+}
+
+@enduml
