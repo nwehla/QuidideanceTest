@@ -12,16 +12,20 @@ package Administration #White{
 Rectangle Quidideance #DarkCyan {
 package Réceptionner #Green/MediumSeaGreen{
     ("Ouvrir mail") as BOX #White
-    ("Ouvrir le lien pour se connecter") as OPE #White
+    ("Ouvrir le lien pour changer de mot de passe") as OPE #White
 }    
 
 
 package Authentifier #Grey/DarkGrey {
     ("Se connecter") as CON #White
-    ("Se déconnecter") as DEC #White
-    ("Modifier mot de passe [première connexion]") as MOD #White
+    ("Mot de passe oublié") as MOD #White
 }
-    ("Rediriger") as RED #White
+package Modifier #MediumPurple/Purple{
+        ("Rediriger") as RED #White
+    ("Changer mot de passe") as CHA #White
+    ("Valider") as VAL #White
+}
+
 
 
 
@@ -29,15 +33,15 @@ package Authentifier #Grey/DarkGrey {
 
 
 
-    ADMIN--up-|>CON #Gold
-    ADMIN---|>DEC #Gold
+    ADMIN--up->CON #Gold
 
-    CON<.-DEC #Gold : Include
     MOD<--CON #Gold
     BOX<.-OPE #Gold : Include
-    OPE-->CON #Gold
-    ADMIN--|>BOX #Gold
-    MOD-> RED #Gold
+    MOD-->BOX  #Gold : Envoie d'un email
+    OPE-up-> CHA #Gold
+    CHA-up-> VAL #Gold
+    VAL-> RED #Gold
+
     
     
     
