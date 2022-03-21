@@ -1,0 +1,52 @@
+@startuml Codecouleur
+left to right direction
+skinparam actorStyle awesome
+skinparam backgroundcolor Grey/Black
+skinparam classBackgroundColor Wheat|CornflowerBlue
+package Administration #White{
+    actor Admin as ADMIN #Gold
+    actor SuperAdmin as SUPADMIN #WhiteSmoke
+}
+
+
+Rectangle Quidideance #DarkCyan {
+package Réceptionner #Green/MediumSeaGreen{
+    ("Ouvrir mail") as BOX #White
+    ("Ouvrir le lien pour se connecter") as OPE #White
+}    
+
+
+package Authentifier #Grey/DarkGrey {
+    ("Se connecter") as CON #White
+    ("Se déconnecter") as DEC #White
+    ("Modifier mot de passe [première connexion]") as MOD #White
+}
+    ("Rediriger") as RED #White
+
+
+
+    SUPADMIN--|> ADMIN : Généralisation Super admin à admin
+
+
+
+    ADMIN--up-|>CON #Gold
+    ADMIN---|>DEC #Gold
+
+    CON<.-DEC #Gold : Include
+    MOD<--CON #Gold
+    BOX<.-OPE #Gold : Include
+    OPE-->CON #Gold
+    ADMIN--|>BOX #Gold
+    MOD-> RED #Gold
+    
+    
+    
+
+
+
+      
+    
+  
+}
+
+@enduml
