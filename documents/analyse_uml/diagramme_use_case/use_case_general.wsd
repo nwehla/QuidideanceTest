@@ -14,7 +14,6 @@ Rectangle Quidideance #DarkCyan {
     ("Surfer sur le site") as SURF #White
     
 package Administrer #DarkSeaGreen/SeaGreen {
-    ("Administrer") as ADM #White
     ("Créer un admin") as ADMNEW #White
     ("Modifier un admin") as ADMEDIT #White
     ("Supprimer un admin") as ADMDELETE #White
@@ -22,7 +21,6 @@ package Administrer #DarkSeaGreen/SeaGreen {
 }    
 package Interroger #RoyalBlue/LightBlue {
 
-    ("Interroger{poser une question}") as INT #White
     ("Créer une question") as INTNEW #White
     ("Modifier une question") as INTEDIT #White
     ("Supprimer une question") as INTDELETE #White
@@ -30,7 +28,6 @@ package Interroger #RoyalBlue/LightBlue {
 }
 package Questionner #Orange/OrangeRed {
 
-    ("Questionner {faire un questionnaire}") as QUE #White
     ("Créer un questionnaire") as QUENEW #White
     ("Modifier un questionnaire") as QUEEDIT #White
     ("Supprimer un questionnaire") as QUEDELETE #White
@@ -39,7 +36,6 @@ package Questionner #Orange/OrangeRed {
 
 package Répondre #Purple/MediumPurple {
 
-    ("Répondre") as REP #White
     ("Créer une réponse") as REPNEW #White
     ("Modifier une réponse") as REPEDIT #White
     ("Supprimer une réponse") as REPDELETE #White
@@ -67,39 +63,35 @@ package Authentifier #Grey/DarkGrey {
 
 
 
-    ADMIN---|>QUE #Gold 
-    QUE---|>QUENEW #Gold
-    QUE---|>QUEEDIT #Gold
-    QUE---|>QUEDELETE #Gold
-    QUE---|>QUESHOW #Gold   
+    ADMIN--->QUENEW #Gold 
+    QUENEW<..-QUEEDIT #Gold : Include
+    QUENEW<..-QUEDELETE #Gold : Include
+    QUENEW<..-QUESHOW #Gold : Include 
 
-    ADMIN---|>INT #Gold
-    INT---|>INTNEW #Gold
-    INT---|>INTEDIT #Gold
-    INT---|>INTDELETE #Gold
-    INT---|>INTSHOW #Gold
+    ADMIN--->INTNEW #Gold
+    INTNEW<..-INTEDIT #Gold : Include
+    INTNEW<..-INTDELETE #Gold : Include
+    INTNEW<..-INTSHOW #Gold : Include
 
-    ADMIN---|>REP #Gold
-    REP---|>REPNEW #Gold
-    REP---|>REPEDIT #Gold
-    REP---|>REPDELETE #Gold
-    REP---|>REPSHOW #Gold
+    ADMIN--->REPNEW #Gold
+    REPNEW<..-REPEDIT #Gold : Include
+    REPNEW<..-REPDELETE #Gold : Include
+    REPNEW<..-REPSHOW #Gold : Include
 
-    ADMIN---|>GER #Gold
-    GER---|>GEREDIT #Gold
-    GER---|>GERSHOW #Gold
+    ADMIN--->GER #Gold
+    GER-..>GEREDIT #Gold : Extend
+    GER-..>GERSHOW #Gold : Extend
 
-    SUPADMIN----->ADM #WhiteSmoke
-    ADM--->ADMNEW #WhiteSmoke
-    ADM--->ADMEDIT #WhiteSmoke
-    ADM--->ADMDELETE #WhiteSmoke
-    ADM--->ADMSHOW #WhiteSmoke
+    SUPADMIN----->ADMNEW #WhiteSmoke
+    ADMNEW<..-ADMEDIT #WhiteSmoke : Include
+    ADMNEW<..-ADMDELETE #WhiteSmoke : Include
+    ADMNEW<..-ADMSHOW #WhiteSmoke : Include
 
     CON<.-DEC #White : Include
-    ADM-.>CON #White : Include
+    SUPADMIN-.>CON #White : Include
     GER-.>CON #White : Include
-    QUENEW<..-INT #White : Include
-    INT<..-REP #White : Include
+    QUENEW<..-INTNEW #White : Include
+    INTNEW<..-REPNEW #White : Include
     
     
     
