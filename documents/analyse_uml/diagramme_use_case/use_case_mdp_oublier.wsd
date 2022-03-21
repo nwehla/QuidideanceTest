@@ -29,14 +29,14 @@ package Authentifier #Grey/DarkGrey {
 
 
 
-    ADMIN--up->CON #Gold
-    ADMIN--->DEC #Gold
+    ADMIN--up-|>CON #Gold
+    ADMIN---|>DEC #Gold
 
     CON<.-DEC #Gold : Include
     MOD<--CON #Gold
     BOX<.-OPE #Gold : Include
     OPE-->CON #Gold
-    ADMIN-->BOX #Gold
+    ADMIN--|>BOX #Gold
     MOD-> RED #Gold
     
     
