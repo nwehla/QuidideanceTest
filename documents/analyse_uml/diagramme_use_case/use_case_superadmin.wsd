@@ -13,10 +13,12 @@ Rectangle Quidideance #DarkCyan/LightBlue {
     ("Surfer sur le site") as SURF #White
     
 package Administrer #DarkSeaGreen/SeaGreen{
-    ("Créer un admin") as ADMNEW #White
-    ("Modifier un admin") as ADMEDIT #White
-    ("Supprimer un admin") as ADMDELETE #White
-    ("Voisr un admin") as ADMSHOW #White
+    ("Créer un compte") as ADMNEW #White
+    ("Modifier un compte") as ADMEDIT #White
+    ("Supprimer un compte") as ADMDELETE #White
+    ("Voir un compte") as ADMSHOW #White
+    ("Admin") as ADMIN #White
+    ("Super admin") as SUPER #White
 }    
 package Interroger #RoyalBlue/LightBlue {
 
@@ -55,7 +57,7 @@ package Authentifier #Grey/DarkGrey {
 
     SUPADMIN--left->CON #White
     SUPADMIN--left->DEC #White
-    SUPADMIN--->SURF #White
+    SUPADMIN-->SURF #White
 
 
 
@@ -74,14 +76,17 @@ package Authentifier #Grey/DarkGrey {
     REPNEW<..-REPDELETE #White : Include
     REPNEW<..-REPSHOW #White : Include
 
-    SUPADMIN--right->GER #White
-    GER--->GEREDIT #White
-    GER--->GERSHOW #White
+    SUPADMIN--->GER #White
+    GER-..>GEREDIT #White : Extend
+    GER-..>GERSHOW #White : Extend
 
-    SUPADMIN--->ADMNEW #WhiteSmoke
-    ADMNEW<..-ADMEDIT #WhiteSmoke : Include
-    ADMNEW<..-ADMDELETE #WhiteSmoke : Include
-    ADMNEW<..-ADMSHOW #WhiteSmoke : Include
+    SUPADMIN--->ADMNEW #White
+    ADMNEW<..-ADMEDIT #White : Include
+    ADMNEW<..-ADMDELETE #White : Include
+    ADMNEW<..-ADMSHOW #White : Include
+    ADMNEW-left->ADMIN #White : Extend
+    ADMNEW-right->SUPER #White : Extend
+
 
     CON<.-DEC #White : Include 
     SUPADMIN-.>CON #White : Include

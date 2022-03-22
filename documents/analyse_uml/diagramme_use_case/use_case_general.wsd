@@ -18,6 +18,8 @@ package Administrer #DarkSeaGreen/SeaGreen {
     ("Modifier un admin") as ADMEDIT #White
     ("Supprimer un admin") as ADMDELETE #White
     ("Voir un admin") as ADMSHOW #White
+    ("Admin") as ADMINS #White
+    ("Super admin") as SUPER #White
 }    
 package Interroger #RoyalBlue/LightBlue {
 
@@ -82,10 +84,12 @@ package Authentifier #Grey/DarkGrey {
     GER-..>GEREDIT #Gold : Extend
     GER-..>GERSHOW #Gold : Extend
 
-    SUPADMIN----->ADMNEW #WhiteSmoke
-    ADMNEW<..-ADMEDIT #WhiteSmoke : Include
-    ADMNEW<..-ADMDELETE #WhiteSmoke : Include
-    ADMNEW<..-ADMSHOW #WhiteSmoke : Include
+    SUPADMIN--->ADMNEW #White
+    ADMNEW<..-ADMEDIT #White : Include
+    ADMNEW<..-ADMDELETE #White : Include
+    ADMNEW<..-ADMSHOW #White : Include
+    ADMNEW-left->ADMINS #White : Extend
+    ADMNEW-right->SUPER #White : Extend
 
     CON<.-DEC #White : Include
     SUPADMIN-.>CON #White : Include
