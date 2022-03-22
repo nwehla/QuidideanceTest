@@ -1,26 +1,26 @@
 Scénario:
-use case connexion
+use case se connecter
 acteurs principal : SuperAdmin , admin
 acteur secondaire : aucun 
 Objectif : Se connecter à l'application
-Pré-condition : Etre inscrit sur le site
+Pré-condition : Avoir un compte créer par un super admin
 Post-condition : Surfer sur le site
-Déclencheur : Authentification
+Déclencheur : Connexion
 
 Scénario Principal 
-1. Le SuperAdmin ou l'Admin clique sur le bouton Authentification.
+1. Le SuperAdmin ou l'Admin clique sur le bouton Connexion.
 2. Il entre son email et son mot de passe.
-3. Il valide en cliquant sur le bouton Authentification.
+3. Il valide en cliquant sur le bouton Connexion.
     -Lors de la première connexion au site, il sera dirigé 
-    vers la page de modification de mot passe, pour changer
-    de mot de passe.
-4. Accès à la page d'accueil du site.
+    vers une page afin de modifier son mot de passe temporaire.
+    Après avoir valider il sera redirigé.
+4. Redirection à la page d'accueil du site.
 
 Scénari alternatifs
 1. Erreur serveur, retour a page d'accueil.
-2. Erreur lors de la saisie de ses identifiants/Message d'erreur "Veuillez remplir corriger ce(s) champ(s)"
+2. Erreur lors de la saisie de ses identifiants. Affichage d'un message d'erreur "Veuillez remplir correctement ce(s) champ(s)".
 Retour au scénario 2.
-3.Mot de passe oublié , envoie d'un lien de récupération de mot de passe.
+3. Mot de passe oublié , envoie d'un lien de récupération de mot de passe.
 4. Erreur serveur, retour a page d'accueil.
 Retour au scénario 1.
 

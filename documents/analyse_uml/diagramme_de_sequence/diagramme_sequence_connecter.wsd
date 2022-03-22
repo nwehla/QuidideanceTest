@@ -1,0 +1,18 @@
+@startuml
+
+actor Admin 
+Admin -> MDP.oublié : Demande de mot de passe oublié
+activate MDP.oublié
+MDP.oublié --> Admin : Envoie d'un nouveau mot de passe par email
+Admin -> Connexion : Connexion
+
+activate Connexion
+Connexion -> EspaceAccueil : Vérification réussie
+destroy Connexion 
+Connexion --> Admin : Erreur server redirection sur la page d'accueil
+Connexion --> Admin : Erreur lors de la saisie d'identification
+Connexion --> Admin : Connexion réussie
+Connexion -> EspaceAccueil : Admin connecter
+EspaceAccueil --> Admin : Redirection sur la page d'accueil
+destroy Admin
+@enduml
