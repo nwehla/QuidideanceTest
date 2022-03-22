@@ -10,103 +10,85 @@ package Administration #White{
 
 Rectangle Quidideance #DarkCyan/LightBlue {
 
-    ("Surfer sur le site") as SURF
+    ("Surfer sur le site") as SURF #White
     
 package Administrer #DarkSeaGreen/SeaGreen{
-    ("Administrer") as ADM 
-    ("Créer un admin") as ADMNEW 
-    ("Modifier un admin") as ADMEDIT 
-    ("Supprimer un admin") as ADMDELETE 
-    ("Voisr un admin") as ADMSHOW 
+    ("Créer un admin") as ADMNEW #White
+    ("Modifier un admin") as ADMEDIT #White
+    ("Supprimer un admin") as ADMDELETE #White
+    ("Voisr un admin") as ADMSHOW #White
 }    
 package Interroger #RoyalBlue/LightBlue {
 
-    ("Interroger{poser une question}") as INT 
-    ("Créer une question") as INTNEW 
-    ("Modifier une question") as INTEDIT 
-    ("Supprimer une question") as INTDELETE 
-    ("Voir une question") as INTSHOW
+    ("Créer une question") as INTNEW #White
+    ("Modifier une question") as INTEDIT #White
+    ("Supprimer une question") as INTDELETE #White
+    ("Voir une question") as INTSHOW #White
 }
 package Questionner #Orange/OrangeRed {
 
-    ("Questionner {faire un questionnaire}") as QUE  
-    ("Créer un questionnaire") as QUENEW 
-    ("Modifier un questionnaire") as QUEEDIT 
-    ("Supprimer un questionnaire") as QUEDELETE 
-    ("Voir un questionnaire") as QUESHOW 
+    ("Créer un questionnaire") as QUENEW #White
+    ("Modifier un questionnaire") as QUEEDIT #White
+    ("Supprimer un questionnaire") as QUEDELETE #White
+    ("Voir un questionnaire") as QUESHOW #White
 }
 package Répondre #Purple/MediumPurple {
 
-    ("Répondre") as REP 
-    ("Créer une réponse") as REPNEW 
-    ("Modifier une réponse") as REPEDIT 
-    ("Supprimer une réponse") as REPDELETE 
-    ("Voir une réponse") as REPSHOW 
+    ("Créer une réponse") as REPNEW #White
+    ("Modifier une réponse") as REPEDIT #White
+    ("Supprimer une réponse") as REPDELETE #White
+    ("Voir une réponse") as REPSHOW #White
 }
 package Gérer #LightCoral/DarkBlue {
 
-    ("Gérer") as GER #WhiteSmoke
-    ("Modifier son compte") as GEREDIT #WhiteSmoke
-    ("Voir ses information") as GERSHOW #WhiteSmoke
+    ("Gérer") as GER #White
+    ("Modifier son compte") as GEREDIT #White
+    ("Voir ses information") as GERSHOW #White
 }
 
 package Authentifier #Grey/DarkGrey {
 
-    ("Se connecter") as CON
-    ("Se déconnecter") as DEC
+    ("Se connecter") as CON #White
+    ("Se déconnecter") as DEC #White
 }
 
 
-    SUPADMIN--left-|>CON #White
-    SUPADMIN--left-|>DEC #White
-    SUPADMIN---|>SURF #White
+    SUPADMIN--left->CON #White
+    SUPADMIN--left->DEC #White
+    SUPADMIN--->SURF #White
 
 
 
-    SUPADMIN---|>QUE #White
-    QUE---|>QUENEW #White
-    QUE---|>QUEEDIT #White
-    QUE---|>QUEDELETE #White
-    QUE---|>QUESHOW #White 
+    SUPADMIN--->QUENEW #White
+    QUENEW<..-QUEEDIT #White : Include
+    QUENEW<..-QUEDELETE #White : Include
+    QUENEW<..-QUESHOW #White : Include
 
-    SUPADMIN---|>INT #White
-    INT---|>INTNEW #White
-    INT---|>INTEDIT #White
-    INT---|>INTDELETE #White
-    INT---|>INTSHOW #White
+    SUPADMIN--->INTNEW #White
+    INTNEW<..-INTEDIT #White : Include
+    INTNEW<..-INTDELETE #White : Include
+    INTNEW<..-INTSHOW #White : Include
 
-    SUPADMIN---|>REP #White
-    REP---|>REPNEW #White
-    REP---|>REPEDIT #White
-    REP---|>REPDELETE #White
-    REP---|>REPSHOW #White
+    SUPADMIN--->REPNEW #White
+    REPNEW<..-REPEDIT #White : Include
+    REPNEW<..-REPDELETE #White : Include
+    REPNEW<..-REPSHOW #White : Include
 
-    SUPADMIN--right-|>GER #White
-    GER---|>GEREDIT #White
-    GER---|>GERSHOW #White
+    SUPADMIN--right->GER #White
+    GER--->GEREDIT #White
+    GER--->GERSHOW #White
 
-    SUPADMIN----->ADM #WhiteSmoke
-    ADM--->ADMNEW #WhiteSmoke
-    ADM--->ADMEDIT #WhiteSmoke
-    ADM--->ADMDELETE #WhiteSmoke
-    ADM--->ADMSHOW #WhiteSmoke
+    SUPADMIN--->ADMNEW #WhiteSmoke
+    ADMNEW<..-ADMEDIT #WhiteSmoke : Include
+    ADMNEW<..-ADMDELETE #WhiteSmoke : Include
+    ADMNEW<..-ADMSHOW #WhiteSmoke : Include
 
     CON<.-DEC #White : Include 
-    ADM-.>CON #White : Include
+    SUPADMIN-.>CON #White : Include
     GER-.>CON #White : Include
-    QUENEW<..-INT #White : Include
-    INT<..-REP #White : Include
-    
-    
-    
-    
-    
+    QUENEW<..-INTNEW #White : Include
+    INTNEW<..-REPNEW #White : Include
 
-
-
-      
-    
-  
 }
 
 @enduml
