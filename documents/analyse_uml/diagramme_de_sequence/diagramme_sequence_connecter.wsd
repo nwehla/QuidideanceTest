@@ -1,18 +1,49 @@
-@startuml
-
+@startuml Connecter
+autonumber
 actor Admin 
-Admin -> MDP.oublié : Demande de mot de passe oublié
+Admin -> MDP.oublié : Afficher interface MDP oublié
 activate MDP.oublié
+MDP.oublié --> Admin : Interface affichée
+deactivate MDP.oublié
+alt #GreenYellow Cas valdide 
 MDP.oublié --> Admin : Envoie d'un nouveau mot de passe par email
-Admin -> Connexion : Connexion
+else #IndianRed Cas problème
+MDP.oublié --> Admin : Erreur server redirection sur la page d'accueil
+MDP.oublié --> Admin : Erreur d'adresse email retour mdp oublié
+end
 
+
+Admin -> Connexion : Afficher interface connexion
 activate Connexion
-Connexion -> EspaceAccueil : Vérification réussie
-destroy Connexion 
-Connexion --> Admin : Erreur server redirection sur la page d'accueil
+Connexion --> Admin : Interface affichée
+loop Séquence connexion
+Admin ->> Connexion : Saisir email
+Admin ->> Connexion : Saisir mot de passe 
+Admin -> Connexion : Cliquer sur Connexion
+Connexion -[#Black]> Connexion : Contrôle de saisie
+Connexion --> Admin : Afficher exception
+end
+deactivate Connexion
+Connexion -> ConnexionValider : Succès de controle
+deactivate ConnexionValider
+
+ConnexionValider -> AdminV : Vérifier (email, mot de passe)
+activate AdminV
+AdminV --> ConnexionValider : Reponse
+deactivate AdminV
+alt #IndianRed Cas problème
+ConnexionValider --> Connexion : Voir alerte (Saisir votre email et votre mot de passe)
+Connexion -> Admin : Message d'erreur affiché
+else #GreenYellow Cas valide
+ConnexionValider --> Connexion : Connexion validée
+Connexion -> EspaceAccueil : Redirigé vers accueil
+end 
+destroy Connexion
+deactivate Connexion
+
 Connexion --> Admin : Erreur lors de la saisie d'identification
 Connexion --> Admin : Connexion réussie
-Connexion -> EspaceAccueil : Admin connecter
+AdminV -> EspaceAccueil : Admin connecter
 EspaceAccueil --> Admin : Redirection sur la page d'accueil
 destroy Admin
 @enduml

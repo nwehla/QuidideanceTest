@@ -1,0 +1,19 @@
+@startuml
+actor Admin 
+Admin -> MDP.oublié --++ : Afficher interface MDP oublié
+MDP.oublié --> Admin --++ : Interface affichée
+alt #GreenYellow Cas valdide 
+MDP.oublié --> Admin --++: Envoie d'un nouveau mot de passe par email
+else #IndianRed Cas problème
+MDP.oublié --> Admin --++: Erreur server redirection sur la page d'accueil
+MDP.oublié --> Admin --++: Erreur d'adresse email retour mdp oublié
+end
+MDP.oublié -> MONQ ++ : BLBALABLA
+MONQ -> MDP.oublié --++ : HAHAHAHA
+MONQ -> MDP.oublié ++ : MERDE
+MDP.oublié -> MONQ ++ : STOP
+MONQ -> MONQ : ++ : VALDO
+
+
+
+@enduml
