@@ -1,8 +1,8 @@
 @startuml Connecter
 autonumber
-actor Admin 
+actor Admin #Black
 Admin -> MDP.oublié : Afficher interface MDP oublié
-activate MDP.oublié
+activate MDP.oublié #SkyBlue
 MDP.oublié --> Admin : Interface affichée
 deactivate MDP.oublié
 alt #GreenYellow Cas valdide 
@@ -14,9 +14,9 @@ end
 
 
 Admin -> Connexion : Afficher interface connexion
-activate Connexion
+activate Connexion #SkyBlue
 Connexion --> Admin : Interface affichée
-loop Séquence connexion
+loop #LightGrey Séquence connexion
 Admin ->> Connexion : Saisir email
 Admin ->> Connexion : Saisir mot de passe 
 Admin -> Connexion : Cliquer sur Connexion
@@ -28,7 +28,7 @@ Connexion -> ConnexionValider : Succès de controle
 deactivate ConnexionValider
 
 ConnexionValider -> AdminV : Vérifier (email, mot de passe)
-activate AdminV
+activate AdminV #SkyBlue
 AdminV --> ConnexionValider : Reponse
 deactivate AdminV
 alt #IndianRed Cas problème
@@ -38,12 +38,10 @@ else #GreenYellow Cas valide
 ConnexionValider --> Connexion : Connexion validée
 Connexion -> EspaceAccueil : Redirigé vers accueil
 end 
-destroy Connexion
 deactivate Connexion
 
-Connexion --> Admin : Erreur lors de la saisie d'identification
-Connexion --> Admin : Connexion réussie
 AdminV -> EspaceAccueil : Admin connecter
-EspaceAccueil --> Admin : Redirection sur la page d'accueil
+EspaceAccueil --> Admin : Redirection sur la page d'accueil du site
 destroy Admin
+
 @enduml
