@@ -1,14 +1,14 @@
-@startuml visiter
+@startuml administrer
 autonumber 
-actor Visiteur
-Visiteur -> Nousconnaitre : Afficher interface Nous connaitre
-activate Nousconnaitre #SkyBlue
-Nousconnaitre --> Visiteur : Interface affichée
-deactivate Nousconnaitre
+actor Superadmin #Black
+Superadmin -> Administrer : Afficher interface administrer
+activate Administrer #SkyBlue
+Administrer --> Superadmin : Interface affichée
+deactivate Administrer
 alt #GreenYellow Cas valdide 
-Nousconnaitre --> Visiteur : Accès à la page nous connaitre
+Administrer --> Superadmin : Accès à la page d'administration
 else #IndianRed Cas problème
-Nousconnaitre --> Visiteur : Erreur server redirection sur la page d'accueil
+Administrer --> Superadmin : Erreur server redirection sur la page d'accueil
 end
 Visiteur -> Connexion : Afficher interface connexion
 activate Connexion #SkyBlue

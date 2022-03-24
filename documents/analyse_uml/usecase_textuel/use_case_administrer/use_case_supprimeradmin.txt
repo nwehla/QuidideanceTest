@@ -1,0 +1,20 @@
+Scénario : suppression d'un admin (admin, super admin)
+use case supprimeradmin
+acteurs principal : super admin 
+acteur secondaire : aucun 
+Objectif : supprimer un admin (admin, super admin)
+Pré-condition : serveur actif, être connecté en tant que super admin
+Post-condition : admin (admin, super admin) supprimer
+Déclencheur : besoin de suppimer un admin (admin, super admin)
+
+Scénario Principal
+1. L'administrateur doit cliquer sur le bouton/lien supprimer un admin.
+2. Redirection vers la page supression d'un admin.
+3. L'administrateur valide la supression.
+4. Retour à la page d'administration.
+
+
+Scénari alternatifs
+1. Erreur serveur, retour à la page d'accueil.
+3. La suppression ne se valide pas car il y a un problème serveur.
+Retour au cas 1.

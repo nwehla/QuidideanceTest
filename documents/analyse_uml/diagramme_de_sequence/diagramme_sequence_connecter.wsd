@@ -6,7 +6,7 @@ activate MDP.oublié #SkyBlue
 MDP.oublié --> Admin : Interface affichée
 deactivate MDP.oublié
 alt #GreenYellow Cas valdide 
-MDP.oublié --> Admin : Envoie d'un nouveau mot de passe par email
+MDP.oublié --> Admin : Envoie d'un lien par email
 else #IndianRed Cas problème
 MDP.oublié --> Admin : Erreur server redirection sur la page d'accueil
 MDP.oublié --> Admin : Erreur d'adresse email retour mdp oublié
