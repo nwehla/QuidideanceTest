@@ -1,0 +1,22 @@
+@startuml Surfer
+autonumber 
+actor Visiteur
+Visiteur -> Nousconnaitre : Afficher interface Nous connaitre
+activate Nousconnaitre #SkyBlue
+Nousconnaitre --> Visiteur : Interface affichée
+deactivate Nousconnaitre
+alt #GreenYellow Cas valdide 
+Nousconnaitre --> Visiteur : Accès à la page nous connaitre
+else #IndianRed Cas problème
+Nousconnaitre --> Visiteur : Erreur server redirection sur la page d'accueil
+end
+Visiteur -> Connexion : Afficher interface connexion
+activate Connexion #SkyBlue
+Connexion --> Visiteur : Interface affichée
+deactivate Connexion
+alt #GreenYellow Cas valdide 
+Nousconnaitre --> Visiteur : Accès à la page connexion
+else #IndianRed Cas problème
+Nousconnaitre --> Visiteur : Erreur server redirection sur la page d'accueil
+end
+@enduml
