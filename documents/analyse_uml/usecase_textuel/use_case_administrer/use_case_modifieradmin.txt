@@ -13,6 +13,8 @@ Scénario Principal
 3. L'administrateur modifie le(s) champ(s) désiré(s).
 6. L'administrateur valide la modification.
 7. Retour à la page d'administration.
+Affichage d'un message "Modification effectuée avec succès"). 
+
 
 Scénari alternatifs
 1. Erreur serveur, retour à la page d'accueil.

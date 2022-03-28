@@ -12,6 +12,8 @@ Scénario Principal
 2. Redirection vers la page supression d'un admin.
 3. L'administrateur valide la supression.
 4. Retour à la page d'administration.
+Affichage d'un message "Suppression effectuée avec succès"). 
+
 
 
 Scénari alternatifs

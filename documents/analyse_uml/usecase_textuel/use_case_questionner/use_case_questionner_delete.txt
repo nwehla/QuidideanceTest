@@ -7,14 +7,16 @@ Pré-condition : Etre SuperAdmin ou admin
 Post-condition : Question supprimer
 Déclencheur : clique sur le lien de suppression
 
-Scénario Principal 
-1. Le SuperAdmin ou l'Admin clique sur le bouton Supprimer la question.
--(affichage d'un méssage="Suppresion éffectuée avec succes" ). 
--retour à la page du questionnaire.
+Scénario Principal
+1. L'administrateur doit cliquer sur le bouton/lien supprimer un questionnaire.
+2. Redirection vers la page supression du questionnaire.
+3. L'administrateur valide la supression.
+4. Retour à la page d'administration.
+Affichage d'un message "Suppression effectuée avec succès". 
 
 Scénari alternatifs
-1. Erreur serveur, retour a page du questionnaire.
--(affichage d'un méssage="Erreur de suppréssion veuillez recommencer").
--retour à la page du questionnaire.
+1. Erreur serveur, retour à la page d'accueil.
+3. La suppression ne se valide pas car il y a un problème serveur.
+Retour au cas 1.
 
 

@@ -15,6 +15,8 @@ Scénario Principal
 5. L'administrateur doit sélectionner un rôle. 
 6. L'administrateur valide l'enregistrement.
 7. Retour à la page d'administration.
+Affichage d'un message "Ajout créé avec succès". 
+
 
 Scénari alternatifs
 1. Erreur serveur, retour à la page d'accueil.

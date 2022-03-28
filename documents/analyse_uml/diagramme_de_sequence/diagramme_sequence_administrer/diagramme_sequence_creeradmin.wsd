@@ -25,6 +25,7 @@ end
 deactivate Validation
 alt #GreenYellow Cas valdide 
 Créer --> Validation : Validation de l'enregistrement. Accès à la page d'administration utilisateur
+Validation --> Utilisateur : Affichage du message "Ajout créé avec succès"
 else #IndianRed Cas problème
 Créer <-- Validation : Erreur server redirection sur la page d'accueil
 Créer <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"

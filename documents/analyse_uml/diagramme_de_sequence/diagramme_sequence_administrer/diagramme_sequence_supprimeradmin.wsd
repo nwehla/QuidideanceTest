@@ -1,0 +1,24 @@
+@startuml supprimeradmin
+autonumber 
+actor Superadmin #Black
+Superadmin -> Utilisateur : Afficher interface administrer
+activate Utilisateur #SkyBlue
+Utilisateur --> Superadmin : Interface affichée
+deactivate Utilisateur
+alt #GreenYellow Cas valide 
+Utilisateur <-- Superadmin : Accès à la page d'administration utilisateur
+else #IndianRed Cas problème
+Utilisateur --> Superadmin : Erreur server redirection sur la page d'accueil
+end
+Utilisateur -> Supprimer : Redirection sur la page
+Supprimer -> Validation : Afficher interface supprimer un admin
+activate Validation #SkyBlue
+Validation --> Supprimer : Interface affichée
+deactivate Validation
+alt #GreenYellow Cas valdide 
+Supprimer --> Validation : Validation de la suppression. Accès à la page d'administration utilisateur
+Validation --> Utilisateur : Affichage du message "Suppression effectuéé avec succès"
+else #IndianRed Cas problème
+Supprimer <-- Validation : Erreur server redirection sur la page d'accueil
+end
+@enduml

@@ -23,7 +23,8 @@ Validation --> Superadmin : Afficher exception
 end
 deactivate Validation
 alt #GreenYellow Cas valdide 
-Modifier --> Validation : Validation de l'enregistrement. Accès à la page d'administration utilisateur
+Modifier --> Validation : Validation de la modification. Accès à la page d'administration utilisateur
+Validation --> Utilisateur : Affichage du message "Modification effectuéé avec succès"
 else #IndianRed Cas problème
 Modifier <-- Validation : Erreur server redirection sur la page d'accueil
 Modifier <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"
