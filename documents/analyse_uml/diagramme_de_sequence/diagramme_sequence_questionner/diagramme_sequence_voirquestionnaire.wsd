@@ -1,0 +1,23 @@
+@startuml voiradmin
+autonumber 
+actor Superadmin #Black
+Superadmin -> Utilisateur : Afficher interface administrer
+activate Utilisateur #SkyBlue
+Utilisateur --> Superadmin : Interface affichée
+deactivate Utilisateur
+alt #GreenYellow Cas valide 
+Utilisateur <-- Superadmin : Accès à la page d'administration utilisateur
+else #IndianRed Cas problème
+Utilisateur --> Superadmin : Erreur server redirection sur la page d'accueil
+end
+Utilisateur -> Voir : Redirection sur la page
+Voir -> Validation : Afficher interface voir un admin
+activate Validation #SkyBlue
+Validation --> Voir : Interface affichée
+deactivate Validation
+alt #GreenYellow Cas valdide 
+Voir --> Validation : Redirection à la page voir de l'admin 
+else #IndianRed Cas problème
+Voir <-- Validation : Erreur server redirection sur la page d'accueil
+end
+@enduml
