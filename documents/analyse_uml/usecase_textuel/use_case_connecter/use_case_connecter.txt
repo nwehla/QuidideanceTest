@@ -23,5 +23,32 @@ Retour au scénario 2.
 3. Mot de passe oublié , envoie d'un lien de récupération de mot de passe.
 4. Erreur serveur, retour a page d'accueil.
 Retour au scénario 1.
+-Lors de la première connexion au site, il sera dirigé 
+    vers une page afin de modifier son mot de passe temporaire.
+    Après avoir valider il sera redirigé.
+4. Redirection à la page d'accueil du site.
+
+Scénari alternatifs
+1. Erreur serveur, retour a page d'accueil.
+2. Erreur lors de la saisie de ses identifiants. Affichage d'un message d'erreur "Veuillez remplir correctement ce(s) champ(s)".
+Retour au scénario 2.
+3. Mot de passe oublié , envoie d'un lien de récupération de mot de passe.
+4. Erreur serveur, retour a page d'accueil.
+Retour au scénario 1.
+-Lors de la première connexion au site, il sera dirigé 
+    vers une page afin de modifier son mot de passe temporaire.
+    Après avoir valider il sera redirigé.
+4. Redirection à la page d'accueil du site.
+
+Scénari alternatifs
+1. Erreur serveur, retour a page d'accueil.
+2. Erreur lors de la saisie de ses identifiants. Affichage d'un message d'erreur "Veuillez remplir correctement ce(s) champ(s)".
+Retour au scénario 2.
+3. Mot de passe oublié , envoie d'un lien de récupération de mot de passe.
+4. Erreur serveur, retour a page d'accueil.
+Retour au scénario 1.
+
+
+
 
 

@@ -1,0 +1,34 @@
+@startuml creeradmin
+autonumber 
+actor Superadmin #Black
+Superadmin -> Utilisateur : Afficher interface administrer
+activate Utilisateur #SkyBlue
+Utilisateur --> Superadmin : Interface affichée
+deactivate Utilisateur
+alt #GreenYellow Cas valdide 
+Utilisateur <-- Superadmin : Accès à la page d'administration utilisateur
+else #IndianRed Cas problème
+Utilisateur --> Superadmin : Erreur server redirection sur la page d'accueil
+end
+Utilisateur -> Créer : Redirection sur la page
+Créer -> Validation : Afficher interface créer un admin
+activate Validation #SkyBlue
+Validation --> Créer : Interface affichée
+loop #LightGrey Séquence enregistrement
+Superadmin ->> Validation : Saisir email
+Superadmin ->> Validation : Saisir mot de passe
+Superadmin ->> Validation : Sélection d'un rôle
+Superadmin -> Validation : Cliquer sur Enregistrer
+Validation -[#Black]> Validation : Contrôle de saisie
+Validation --> Superadmin : Afficher exception
+end
+deactivate Validation
+alt #GreenYellow Cas valdide 
+Créer --> Validation : Validation de l'enregistrement. Accès à la page d'administration utilisateur
+else #IndianRed Cas problème
+Créer <-- Validation : Erreur server redirection sur la page d'accueil
+Créer <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"
+Créer <-- Validation : Erreur lors de la sélection du rôle. Affichage d'un message "Veuillez sélectionner un rôle !" 
+Créer <-- Validation : Erreur lors de la validation de l'enregistrement. Affichage d'un message 
+end
+@enduml
