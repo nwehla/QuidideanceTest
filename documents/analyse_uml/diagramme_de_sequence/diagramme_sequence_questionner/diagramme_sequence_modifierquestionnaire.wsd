@@ -1,4 +1,4 @@
-@startuml modifieradmin
+@startuml modifierquestionnaire
 autonumber 
 actor Administrateur #Black
 Administrateur -> Questionnaire : Afficher interface questionnaire

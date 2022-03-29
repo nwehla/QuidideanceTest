@@ -1,22 +1,22 @@
-@startuml voiradmin
+@startuml voirquestionnaire
 autonumber 
-actor Superadmin #Black
-Superadmin -> Utilisateur : Afficher interface administrer
-activate Utilisateur #SkyBlue
-Utilisateur --> Superadmin : Interface affichée
-deactivate Utilisateur
+actor Administrateur #Black
+Administrateur -> Questionnaire : Afficher interface questionnaire
+activate Questionnaire #SkyBlue
+Questionnaire --> Administrateur : Interface affichée
+deactivate Questionnaire
 alt #GreenYellow Cas valide 
-Utilisateur <-- Superadmin : Accès à la page d'administration utilisateur
+Utilisateur <-- Administrateur : Accès à la page d'administration questionnaire
 else #IndianRed Cas problème
-Utilisateur --> Superadmin : Erreur server redirection sur la page d'accueil
+Utilisateur --> Administrateur : Erreur server redirection sur la page d'accueil
 end
 Utilisateur -> Voir : Redirection sur la page
-Voir -> Validation : Afficher interface voir un admin
+Voir -> Validation : Afficher interface voir un questionnaire
 activate Validation #SkyBlue
 Validation --> Voir : Interface affichée
 deactivate Validation
 alt #GreenYellow Cas valdide 
-Voir --> Validation : Redirection à la page voir de l'admin 
+Voir --> Validation : Redirection à la page voir du questionnaire
 else #IndianRed Cas problème
 Voir <-- Validation : Erreur server redirection sur la page d'accueil
 end

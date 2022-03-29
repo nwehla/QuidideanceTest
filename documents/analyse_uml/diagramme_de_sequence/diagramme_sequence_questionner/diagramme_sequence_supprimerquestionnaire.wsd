@@ -1,23 +1,23 @@
-@startuml supprimeradmin
+@startuml supprimerquestionnaire
 autonumber 
-actor Superadmin #Black
-Superadmin -> Utilisateur : Afficher interface administrer
-activate Utilisateur #SkyBlue
-Utilisateur --> Superadmin : Interface affichée
-deactivate Utilisateur
+actor Administrateur #Black
+Administrateur -> Questionnaire : Afficher interface questionnaire
+activate Questionnaire #SkyBlue
+Questionnaire --> Administrateur : Interface affichée
+deactivate Questionnaire
 alt #GreenYellow Cas valide 
-Utilisateur <-- Superadmin : Accès à la page d'administration utilisateur
+Questionnaire <-- Administrateur : Accès à la page d'administration questionnaire
 else #IndianRed Cas problème
-Utilisateur --> Superadmin : Erreur server redirection sur la page d'accueil
+Questionnaire --> Administrateur : Erreur server redirection sur la page d'accueil
 end
-Utilisateur -> Supprimer : Redirection sur la page
-Supprimer -> Validation : Afficher interface supprimer un admin
+Questionnaire -> Supprimer : Redirection sur la page
+Supprimer -> Validation : Afficher interface supprimer un questionnaire
 activate Validation #SkyBlue
 Validation --> Supprimer : Interface affichée
 deactivate Validation
 alt #GreenYellow Cas valdide 
-Supprimer --> Validation : Validation de la suppression. Accès à la page d'administration utilisateur
-Validation --> Utilisateur : Affichage du message "Suppression effectuéé avec succès"
+Supprimer --> Validation : Validation de la suppression. Accès à la page d'administration questionnaire
+Validation --> Questionnaire : Affichage du message "Suppression effectuéé avec succès"
 else #IndianRed Cas problème
 Supprimer <-- Validation : Erreur server redirection sur la page d'accueil
 end
