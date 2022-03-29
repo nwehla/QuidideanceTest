@@ -1,34 +1,35 @@
 @startuml modifieradmin
 autonumber 
-actor Superadmin #Black
-Superadmin -> Utilisateur : Afficher interface administrer
-activate Utilisateur #SkyBlue
-Utilisateur --> Superadmin : Interface affichée
-deactivate Utilisateur
+actor Administrateur #Black
+Administrateur -> Questionnaire : Afficher interface questionnaire
+activate Questionnaire #SkyBlue
+Questionnaire --> Administrateur : Interface affichée
+deactivate Questionnaire
 alt #GreenYellow Cas valdide 
-Utilisateur <-- Superadmin : Accès à la page d'administration utilisateur
+Questionnaire <-- Administrateur : Accès à la page d'administration questionnaire
 else #IndianRed Cas problème
-Utilisateur --> Superadmin : Erreur server redirection sur la page d'accueil
+Questionnaire --> Administrateur : Erreur server redirection sur la page d'accueil
 end
-Utilisateur -> Modifier : Redirection sur la page
-Modifier -> Validation : Afficher interface modifier un admin
+Questionnaire -> Modifier : Redirection sur la page
+Modifier -> Validation : Afficher interface modifier un questionnaire
 activate Validation #SkyBlue
 Validation --> Modifier : Interface affichée
 loop #LightGrey Séquence enregistrement
-Superadmin ->> Validation : Modification des champs désirés
-Superadmin ->> Validation : Sélection d'un rôle
-Superadmin -> Validation : Cliquer sur Modifier
+Administrateur ->> Validation : Modification des champs désirés (question, réponse)
+Administrateur ->> Validation : Sélection d'une date de début de validité du questionnaire
+Administrateur ->> Validation : Sélection d'une date de début de fin du questionnaire
+Administrateur -> Validation : Cliquer sur Modifier
 Validation -[#Black]> Validation : Contrôle de saisie
-Validation --> Superadmin : Afficher exception
+Validation --> Administrateur : Afficher exception
 end
 deactivate Validation
 alt #GreenYellow Cas valdide 
-Modifier --> Validation : Validation de la modification. Accès à la page d'administration utilisateur
-Validation --> Utilisateur : Affichage du message "Modification effectuéé avec succès"
+Modifier --> Validation : Validation de la modification. Accès à la page d'administration questionnaire
+Validation --> Questionnaire : Affichage du message "Modification effectuéé avec succès"
 else #IndianRed Cas problème
 Modifier <-- Validation : Erreur server redirection sur la page d'accueil
 Modifier <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"
-Modifier <-- Validation : Erreur lors de la sélection du rôle. Affichage d'un message "Veuillez sélectionner un rôle !" 
+Modifier <-- Validation : Erreur lors de la sélection du rôle. Affichage d'un message "Veuillez sélectionner une date !" 
 Modifier <-- Validation : Erreur lors de la validation de l'enregistrement. Affichage d'un message 
 end
 @enduml
