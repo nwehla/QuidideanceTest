@@ -7,7 +7,16 @@ Pré-condition : Etre connecté sur le site
 Post-condition : Question(s) créée(s)
 Déclencheur : Besoin de créer une ou des questions
 
-Scénario Principal 
+Scénario Principal
+1. L'administrateur clique sur le bouton question.
+2. Redirection sur la page question. Il clique sur le bouton ajouter.
+3. L'administrateur ajoutera une catégorie.
+4. L'administrateur ajoutera une date de début , une date de fin au formulaire.
+5. L'administrateur valide l'enregistrement.
+Affichage d'un message "Questionnaire créer"
+
+
+
 1. Le SuperAdmin ou l'Admin clique sur le bouton ajouter une Question.
 2. Redirection sur la page pour enregister la question souhaitée. 
 3. Le SuperAdmin ou l'Admin enregistre la question.

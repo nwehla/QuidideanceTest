@@ -13,6 +13,7 @@ Scénario Principal
 3. L'administrateur ajoutera des questions et des réponses au formulaire.
 4. L'administrateur ajoutera une date de début , une date de fin au formulaire.
 5. L'administrateur valide l'enregistrement.
+Affichage d'un message "Questionnaire créer"
 
 Scénari alternatifs
 1. Erreur serveur, retour a page d'accueil.
