@@ -1,0 +1,6 @@
+Lundi 28 mars vendredi  1 avril
+
+Semaine d'écriture et de réflexion sur les diagrammes textuels. Nous avons commencer à écrire les diagrammes
+textuels. Ce diagramme est subdivisé en trois grandes lignes directrices qui sont : le scénario principal, les scénarios alternatifs
+et les cas d'erreurs. Nous avons mis en place un scénario principal qui selon certains événements peuvent ammenés à un scénario 
+alternatif. Lors de ces étapes nous avons évalués les possibilités d'erreurs

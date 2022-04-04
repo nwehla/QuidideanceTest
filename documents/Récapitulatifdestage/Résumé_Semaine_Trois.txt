@@ -4,5 +4,5 @@ Semaine de cloture du cahier des charges
 Nous avons fait quelques correctifs sur le cahier des charges
 lors d'un échange avec notre tuteur de stage. En effet après  avoir
 discuté avec celui-ci, quelques manquements d'ordre technique ont
-été constatés. Nous avons en forme le
-document 
+été constatés. Nous avons mis en forme le
+document. 

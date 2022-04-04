@@ -1,0 +1,7 @@
+Lundi 21 mars vendredi 25 mars
+
+Semaine de préparation pour la mise en place des différents
+diagrammes. Nous avons commencés à travailler sur les diagrammes
+de use case. Ces schémas visuels permettront à une personne de voir les 
+différents acteurs avec leur intéraction lors d'une situation donnée de l'application. 
+Pour information nous avons donc mis les principaux use case qui nous semblaient pertinent. 
