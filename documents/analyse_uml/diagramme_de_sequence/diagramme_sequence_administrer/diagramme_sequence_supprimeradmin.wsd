@@ -19,6 +19,6 @@ alt #GreenYellow Cas valdide
 Supprimer --> Validation : Validation de la suppression. Accès à la page d'administration utilisateur
 Validation --> Utilisateur : Affichage du message "Suppression effectuéé avec succès"
 else #IndianRed Cas problème
-Supprimer <-- Validation : Erreur server redirection sur la page d'accueil
+Supprimer <-- Validation : La suppression ne se valide pas. Redirection sur la page d'administration utilisateur. Affichage du message "Suppression non effectuéé" 
 end
 @enduml

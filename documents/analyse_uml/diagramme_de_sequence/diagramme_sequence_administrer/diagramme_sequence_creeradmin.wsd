@@ -10,10 +10,10 @@ Utilisateur <-- Superadmin : Accès à la page d'administration utilisateur
 else #IndianRed Cas problème
 Utilisateur --> Superadmin : Erreur server redirection sur la page d'accueil
 end
-Utilisateur -> Créer : Redirection sur la page
-Créer -> Validation : Afficher interface créer un admin
+Utilisateur -> Ajouter : Redirection sur la page
+Ajouter -> Validation : Afficher interface ajouter un admin
 activate Validation #SkyBlue
-Validation --> Créer : Interface affichée
+Validation --> Ajouter : Interface affichée
 loop #LightGrey Séquence enregistrement
 Superadmin ->> Validation : Saisir email
 Superadmin ->> Validation : Saisir mot de passe
@@ -24,12 +24,12 @@ Validation --> Superadmin : Afficher exception
 end
 deactivate Validation
 alt #GreenYellow Cas valdide 
-Créer --> Validation : Validation de l'enregistrement. Accès à la page d'administration utilisateur
+Ajouter --> Validation : Validation de l'enregistrement. Accès à la page d'administration utilisateur
 Validation --> Utilisateur : Affichage du message "Ajout créé avec succès"
 else #IndianRed Cas problème
-Créer <-- Validation : Erreur server redirection sur la page d'accueil
-Créer <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"
-Créer <-- Validation : Erreur lors de la sélection du rôle. Affichage d'un message "Veuillez sélectionner un rôle !" 
-Créer <-- Validation : Erreur lors de la validation de l'enregistrement. Affichage d'un message 
+Ajouter <-- Validation : Erreur server redirection sur la page d'accueil
+Ajouter <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"
+Ajouter <-- Validation : Erreur lors de la sélection du rôle. Affichage d'un message "Veuillez sélectionner un rôle !" 
+Ajouter <-- Validation : Erreur lors de la validation de l'enregistrement. Affichage d'un message 
 end
 @enduml

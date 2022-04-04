@@ -1,0 +1,30 @@
+Scénario:
+use case repondre créer
+acteurs principal : SuperAdmin , admin
+acteur secondaire : aucun 
+Objectif : Créer une ou des réponses
+Pré-condition : Etre connecté sur le site
+Post-condition : réponses(s) créée(s)
+Déclencheur : Besoin de créer une ou des réponses
+
+Scénario Principal 
+1. Le SuperAdmin ou l'Admin clique sur le bouton ajouter une réponse.
+2. Redirection sur la page pour enregister la réponse souhaitée. 
+3. Le SuperAdmin ou l'Admin enregistre la réponse.
+4. Le SuperAdmin ou l'Admin clique sur valider.
+
+
+Scénari alternatifs
+1. Erreur serveur, retour a page d'accueil.
+2. Erreur après avoir cliqué sur le lien ajouter une réponse.
+  "- Message=impossible d'ajouter une réponse,veuillez recommencer !".
+   -retour au scénario 1. 
+3. Erreur après avoir remplie de champ de la réponse.
+   "-Message=impossible d'enregister cette réponse,veuillez la réécrire ".
+    -retour au scénario
+     retour au scénario 3.
+4. Erreur après avoir valider la réponse .
+   "-Message=impossible de valider la réponse".
+   retour au scénario 3.
+
+

@@ -1,4 +1,5 @@
-Scénario:
+
+lScénario:
 use case oublié
 acteurs principaux : superAdmin, l'admin 
 acteur secondaire : aucun

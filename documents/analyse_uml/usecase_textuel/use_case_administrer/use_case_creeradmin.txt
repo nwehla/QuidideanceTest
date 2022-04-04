@@ -2,6 +2,7 @@ Scénario : création d'un admin (admin, super admin)
 use case creeradmin
 acteurs principal : super admin 
 acteur secondaire : aucun 
+
 Objectif : créer un admin (admin, super admin)
 Pré-condition : serveur actif, être connecté en tant que super admin
 Post-condition : admin (admin, super admin) créé
