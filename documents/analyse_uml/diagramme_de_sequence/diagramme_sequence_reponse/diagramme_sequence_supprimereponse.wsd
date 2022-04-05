@@ -1,24 +1,24 @@
-@startuml supprimerquestionnaire
+@startuml supprimereponse
 autonumber 
 actor Administrateur #Black
-Administrateur -> Questionnaire : Afficher interface questionnaire
-activate Questionnaire #SkyBlue
-Questionnaire --> Administrateur : Interface affichée
-deactivate Questionnaire
+Administrateur -> Reponse : Afficher interface réponse
+activate Reponse #SkyBlue
+Reponse --> Administrateur : Interface affichée
+deactivate Reponse
 alt #GreenYellow Cas valide 
-Questionnaire <-- Administrateur : Accès à la page d'administration questionnaire
+Reponse <-- Administrateur : Accès à la page d'administration réponse
 else #IndianRed Cas problème
-Questionnaire --> Administrateur : Erreur server redirection sur la page d'accueil
+Reponse --> Administrateur : Erreur server redirection sur la page d'accueil
 end
-Questionnaire -> Supprimer : Redirection sur la page
-Supprimer -> Validation : Afficher interface supprimer un questionnaire
+Reponse -> Supprimer : Redirection sur la page
+Supprimer -> Validation : Afficher interface supprimer une réponse
 activate Validation #SkyBlue
 Validation --> Supprimer : Interface affichée
 deactivate Validation
 alt #GreenYellow Cas valdide 
-Supprimer --> Validation : Validation de la suppression. Accès à la page d'administration questionnaire
-Validation --> Questionnaire : Affichage du message "Suppression effectuéé avec succès"
+Supprimer --> Validation : Validation de la suppression. Accès à la page d'administration réponse
+Validation --> Reponse : Affichage du message "Suppression effectuéé avec succès"
 else #IndianRed Cas problème
-Supprimer <-- Validation : Erreur server redirection sur la page d'accueil
+Supprimer <-- Validation : La suppression ne se valide pas. Redirection sur la page d'administration réponse. Affichage du message "Suppression non effectuéé"
 end
 @enduml
