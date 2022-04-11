@@ -2,19 +2,34 @@
 
 class Questionnaire{
     -titre : String
+    -question : String
     -description : Textarea
-    -datedebut : Datetime
-    -datefin : Datetime
+    -multiple : Bool
+    -statut : String
+    -messagefermeture : Textarea
+    -datecreation : Datetime
+    -datemiseajour : Datetime
+    -datedefermeture : Datetime
 
     +getid() : ? int
     +getTitre() : ? string
     +setTitre() : self
+    +getQuestion() : ? string
+    +setQuestion() : self
     +getDescription() : ? string
     +setDescription() : self
-    +getDatedebut() : ? string
-    +setDatedebut() : self
-    +getDatefin() : ? string
-    +setDatefin() : self
+    +getMultiple() : ? bool
+    +setMultiple() : self
+    +getStatut() : string
+    +setStatut() : self
+    +getMessagefermeture() : ? datetime
+    +setMessagefermeture() : self
+    +getDatecreation() : ? datetime
+    +setDatecreation() : self
+    +getDatedemiseajour() : ? datetime
+    +setDatedemiseajour() : self
+    +getDatedefermeture() : ? datetime
+    +setDatedefermeture() : self
 
     +ajouterQuestion(Question) : Void
     +supprimerQuestion(Question) : Bool
@@ -23,66 +38,49 @@ class Questionnaire{
     +supprimerReponse(Reponse) : Bool
     +modifierReponse(Reponse): Bool
 }
-class Questionthème{
-    -titre : String
-    -description : Textarea
-
-    +getid() : ? int
-    +getTitre() : ? string
-    +setTitre() : self
-    +getDescription() : ? string
-    +setDescription() : self
-   
-}
 
 class Reponse{
-    -titre : String
-    -description : Textarea
+    -repondant : String
+    -commentaire : Textarea
+    -email : String
+    -acceptationpartagedonnee : Bool
+    -datecreation : Datetime
+    -datemiseajour : Datetime
+    -datedefermeture : Datetime    
 
     +getid() : ? int
-    +getTitre() : ? string
-    +setTitre() : self
-    +getDescription() : ? string
-    +setDescription() : self
-}
+    +getRepondant() : ? string
+    +setRepondant() : self
+    +getCommentaire() : ? string
+    +setCommentaire() : self
+    +getEmail() : ? string
+    +setEmail() : self
+    +getAcceptationpartagedonne() : ? bool
+    +setAcceptationpartagedonne() : self
+    +getDatecreation() : ? datetime
+    +setDatecreation() : self
+    +getDatedemiseajour() : ? datetime
+    +setDatedemiseajour() : self
+    +getDatedefermeture() : ? datetime
+    +setDatedefermeture() : self
 
-class Categorie_question{
-    -nom : String
-    -description : Textarea
-
-    +getid() : ? int
-    +getNom() : ? string
-    +setNom() : self
-    +getDescription() : ? string
-    +setDescription() : self
-
-    +ajouterLieu(Lieu) : Void
-    +supprimerLieu(Lieu) : Bool
-    +modifierLieu(Lieu): Bool
-}
-
-class Choix_reponse{
-    -nom : String
-    -description : Textarea
-
-    +getid() : ? int
-    +getNom() : ? string
-    +setNom() : self
-    +getDescription() : ? string
-    +setDescription() : self
-
-    +ajouterLieu(Lieu) : Void
-    +supprimerLieu(Lieu) : Bool
-    +modifierLieu(Lieu): Bool
+    +ajouterReponse(Reponse) : Void
+    +supprimerReponse(Reponse) : Bool
+    +modifierReponse(Reponse): Bool    
 }
 
 class Utilisateur{
+    -prenom : String
     -email : Email
     -password : Password
     -roles : Array
     -slug : String
+    -datecreation : Datetime
+    -datemiseajour : Datetime
 
     +getid() : ? int
+    +getPrenom() : ? string
+    +setPrenom() : self
     +getEmail() : ? string
     +setEmail() : self
     +getPassword() : ? string
@@ -90,55 +88,19 @@ class Utilisateur{
     +getRoles() : ? array
     +setRoles() : self
     +getSlug() : ? string
-    +setSlug() : self
+    +setDateSlug() : self
+    +getDatecreation() : ? datetime 
+    +setDatecreation() : self
+    +getDatemiseajour() : ? datetime
+    +setDatemiseajour() : self
+
+    +ajouterUtilisateur(Utilisateur) : Void
+    +supprimerUtilisateur(Utilisateur) : Bool
+    +modifierUtilisateur(Utilisateur): Bool
 }
 
-class Reponsetexte{
-    -nom : String
-    -description : Textarea
-
-    +getid() : ? int
-    +getNom() : ? string
-    +setNom() : self
-    +getDescription() : ? string
-    +setDescription() : self
-
-    +ajouterLieu(Lieu) : Void
-    +supprimerLieu(Lieu) : Bool
-    +modifierLieu(Lieu): Bool
-}
-
-class Reponsebool{
-    -nom : String
-    -description : Textarea
-
-    +getid() : ? int
-    +getNom() : ? string
-    +setNom() : self
-    +getDescription() : ? string
-    +setDescription() : self
-
-    +ajouterLieu(Lieu) : Void
-    +supprimerLieu(Lieu) : Bool
-    +modifierLieu(Lieu): Bool
-}
-
-class Reponsemultiple{
-    -nom : String
-    -description : Textarea
-
-    +getid() : ? int
-    +getNom() : ? string
-    +setNom() : self
-    +getDescription() : ? string
-    +setDescription() : self
-
-    +ajouterLieu(Lieu) : Void
-    +supprimerLieu(Lieu) : Bool
-    +modifierLieu(Lieu): Bool
-}
-
-Activite  "1..*" -down-o "1"Utilisateur: [Participer]
-Activite  "1..*" -down-o "1"Lieu: [Localiser]
-Activite  "1..*" -down-o "1"Genre: [Appartenir]
+' exemple de relation
+' Activite  "1..*" -down-o "1"Utilisateur: [Participer]
+' Activite  "1..*" -down-o "1"Lieu: [Localiser]
+' Activite  "1..*" -down-o "1"Genre: [Appartenir]
 @enduml

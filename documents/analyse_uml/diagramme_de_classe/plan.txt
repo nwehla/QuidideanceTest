@@ -1,0 +1,102 @@
+Éléments Description Type
+Utilisateur 
+(administrateur)
+Entité
+- id                   Identifiant d’un utilisateur        Entier
+- prénom               Prénom d’un utilisateur             Chaîne
+- nom                  Nom d’un utilisateur                Chaîne
+- email                Adresse email d’un utilisateur      Chaîne
+- mot de passe         Mot de passe d’un utilisateur       Chaîne
+- rôle                 Rôle (droits) d’un utilisateur      Json
+- date de création     Date de création du compte de d’un utilisateur   Date
+- date de mise à jour  Date de la dernière modification    Date
+
+
+Sondage Entité
+- id                   Identifiant d’un sondage            Entier
+- titre                Titre d’un sondage                  Chaîne
+- question             Intitulé de la question             Chaîne
+- information          Information supplémentaire sur la question  Text
+- multiple             Type de la question (si plusieurs réponses possibles)    Boolean
+- statut               État d’un sondage                    Chaîne
+- message de clôture   Message de fermeture d’un sondage    Text
+- date de création     Date de création d’un sondage        Date
+- date de mise à jour  Date de la dernière modification     Date
+- date de clôture      Date de fermeture d’un sondage       Date
+
+Personne répondante Entité
+- id                   Identifiant de la personne répondante        Entier
+- user                 agent User agent de la personne répondante   Chaîne
+- commentaire          Commentaire de la personne                   Text
+répondante (optionnel)
+- email Adresse mail de la personne 
+répondante (optionnel)                                              Chaîne
+- Acceptation partage de données Autorisation du partage de données Boolean
+- date création         Date de réalisation (du sondage)            Date
+
+
+Composant technique Entité
+- id Identifiant du composant technique Entier
+- titre Titre du composant technique Chaîne
+- description Description du composant technique Text
+- choice Mode d’implémentation du 
+composant technique
+Boolean
+- code Code source du composant technique Text
+- url Url du composant technique Chaîne
+
+
+
+Proposition Entité
+- id       Identifiant de la proposition    Entier
+- Intitulé Intitulé de la proposition       Chaîne
+
+
+Technologie d’assistance Entité
+- id Identifiant de la technologie 
+d’assistance
+Entier
+- nom Nom de la technologie d’assistance Chaîne
+
+
+Participer : réponse 
+(=personne répondante) 
+→ sondage
+Chaque personne répondante 
+participe à un sondage.
+Association
+
+
+Comporter : sondage → 
+composant technique
+Chaque sondage comporte aucun (ou 
+des) composant(s) technique(s)
+Association
+
+
+Présenter : sondage → 
+proposition
+Chaque sondage (question) présente 
+à une (ou des) proposition(s) de 
+réponse.
+Association
+46
+
+
+Choisir: réponse 
+(=personne répondante) 
+→ proposition
+Chaque personne répondant peut 
+répondre à une question en 
+cochant une (ou des) 
+proposition(s) de réponse.
+Association
+
+
+Utiliser: personne 
+répondante → 
+technologie d’assistance
+Pendant le sondage, la personne 
+répondante utilise une (ou des) 
+technologie(s) d’assistance.
+Association
