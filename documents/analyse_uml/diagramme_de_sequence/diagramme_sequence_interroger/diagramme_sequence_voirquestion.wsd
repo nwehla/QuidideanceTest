@@ -1,0 +1,23 @@
+@startuml voirquestion
+autonumber 
+actor Administrateur #Black
+Administrateur -> Question : Afficher interface question
+activate Question #SkyBlue
+Question --> Administrateur : Interface affichée
+deactivate Question
+alt #GreenYellow Cas valide 
+Question <-- Administrateur : Accès à la page d'administration question
+else #IndianRed Cas problème
+Question --> Administrateur : Erreur server redirection sur la page d'accueil
+end
+Question -> Voir : Redirection sur la page
+Voir -> Validation : Afficher interface voir une question
+activate Validation #SkyBlue
+Validation --> Voir : Interface affichée
+deactivate Validation
+alt #GreenYellow Cas valdide 
+Voir --> Validation : Redirection à la page voir une question
+else #IndianRed Cas problème
+Voir <-- Validation : Erreur server redirection sur la page d'accueil
+end
+@enduml

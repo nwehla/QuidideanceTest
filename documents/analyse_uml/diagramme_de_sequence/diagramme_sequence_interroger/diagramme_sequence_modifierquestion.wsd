@@ -1,0 +1,32 @@
+@startuml modifierquestion
+autonumber 
+actor Administrateur #Black
+Administrateur -> Question : Afficher interface question
+activate Question #SkyBlue
+Question --> Administrateur : Interface affichée
+deactivate Question
+alt #GreenYellow Cas valdide 
+Question <-- Administrateur : Accès à la page d'administration question
+else #IndianRed Cas problème
+Question --> Administrateur : Erreur server redirection sur la page d'accueil
+end
+Question -> Modifier : Redirection sur la page
+Modifier -> Validation : Afficher interface modifier une question
+activate Validation #SkyBlue
+Validation --> Modifier : Interface affichée
+loop #LightGrey Séquence enregistrement
+Administrateur ->> Validation : Modification des champs désirés
+Administrateur -> Validation : Cliquer sur Modifier
+Validation -[#Black]> Validation : Contrôle de saisie
+Validation --> Administrateur : Afficher exception
+end
+deactivate Validation
+alt #GreenYellow Cas valdide 
+Modifier --> Validation : Validation de la modification. Accès à la page d'administration question
+Validation --> Question : Affichage du message "Modification effectuée avec succès"
+else #IndianRed Cas problème
+Modifier <-- Validation : Erreur server redirection sur la page d'accueil
+Modifier <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"
+Modifier <-- Validation : Erreur lors de la validation de l'enregistrement. Affichage d'un message 
+end
+@enduml

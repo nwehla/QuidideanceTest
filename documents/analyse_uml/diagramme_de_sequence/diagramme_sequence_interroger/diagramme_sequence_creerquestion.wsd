@@ -1,0 +1,32 @@
+@startuml creerquestion
+autonumber 
+actor Administrateur #Black
+Administrateur -> Question : Afficher interface question
+activate Question #SkyBlue
+Question --> Administrateur : Interface affichée
+deactivate Question
+alt #GreenYellow Cas valide 
+Question <-- Administrateur : Accès à la page d'administration d'une question
+else #IndianRed Cas problème
+Question --> Administrateur : Erreur server redirection sur la page d'accueil
+end
+Question -> Créer : Redirection sur la page
+Créer -> Validation : Afficher interface créer une question
+activate Validation #SkyBlue
+Validation --> Créer : Interface affichée
+loop #LightGrey Séquence enregistrement
+Administrateur ->> Validation : Saisis des champs demandés
+Administrateur -> Validation : Cliquer sur Enregistrer
+Validation -[#Black]> Validation : Contrôle de saisie
+Validation --> Administrateur : Afficher exception
+end
+deactivate Validation
+alt #GreenYellow Cas valide 
+Créer --> Validation : Validation de l'enregistrement. Accès à la page d'administration question
+Validation --> Réponse : Affichage du message "Ajout créé avec succès"
+else #IndianRed Cas problème
+Créer <-- Validation : Erreur server redirection sur la page d'accueil
+Créer <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"
+Créer <-- Validation : Erreur lors de la validation de l'enregistrement. Affichage d'un message 
+end
+@enduml

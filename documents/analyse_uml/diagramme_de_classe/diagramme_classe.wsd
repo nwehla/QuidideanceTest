@@ -1,0 +1,144 @@
+@startuml
+
+class Questionnaire{
+    -titre : String
+    -description : Textarea
+    -datedebut : Datetime
+    -datefin : Datetime
+
+    +getid() : ? int
+    +getTitre() : ? string
+    +setTitre() : self
+    +getDescription() : ? string
+    +setDescription() : self
+    +getDatedebut() : ? string
+    +setDatedebut() : self
+    +getDatefin() : ? string
+    +setDatefin() : self
+
+    +ajouterQuestion(Question) : Void
+    +supprimerQuestion(Question) : Bool
+    +modifierQuestion(Question): Bool
+    +ajouterReponse(Reponse) : Void
+    +supprimerReponse(Reponse) : Bool
+    +modifierReponse(Reponse): Bool
+}
+class Questionthème{
+    -titre : String
+    -description : Textarea
+
+    +getid() : ? int
+    +getTitre() : ? string
+    +setTitre() : self
+    +getDescription() : ? string
+    +setDescription() : self
+   
+}
+
+class Reponse{
+    -titre : String
+    -description : Textarea
+
+    +getid() : ? int
+    +getTitre() : ? string
+    +setTitre() : self
+    +getDescription() : ? string
+    +setDescription() : self
+}
+
+class Categorie_question{
+    -nom : String
+    -description : Textarea
+
+    +getid() : ? int
+    +getNom() : ? string
+    +setNom() : self
+    +getDescription() : ? string
+    +setDescription() : self
+
+    +ajouterLieu(Lieu) : Void
+    +supprimerLieu(Lieu) : Bool
+    +modifierLieu(Lieu): Bool
+}
+
+class Choix_reponse{
+    -nom : String
+    -description : Textarea
+
+    +getid() : ? int
+    +getNom() : ? string
+    +setNom() : self
+    +getDescription() : ? string
+    +setDescription() : self
+
+    +ajouterLieu(Lieu) : Void
+    +supprimerLieu(Lieu) : Bool
+    +modifierLieu(Lieu): Bool
+}
+
+class Utilisateur{
+    -email : Email
+    -password : Password
+    -roles : Array
+    -slug : String
+
+    +getid() : ? int
+    +getEmail() : ? string
+    +setEmail() : self
+    +getPassword() : ? string
+    +setPassword() : self
+    +getRoles() : ? array
+    +setRoles() : self
+    +getSlug() : ? string
+    +setSlug() : self
+}
+
+class Reponsetexte{
+    -nom : String
+    -description : Textarea
+
+    +getid() : ? int
+    +getNom() : ? string
+    +setNom() : self
+    +getDescription() : ? string
+    +setDescription() : self
+
+    +ajouterLieu(Lieu) : Void
+    +supprimerLieu(Lieu) : Bool
+    +modifierLieu(Lieu): Bool
+}
+
+class Reponsebool{
+    -nom : String
+    -description : Textarea
+
+    +getid() : ? int
+    +getNom() : ? string
+    +setNom() : self
+    +getDescription() : ? string
+    +setDescription() : self
+
+    +ajouterLieu(Lieu) : Void
+    +supprimerLieu(Lieu) : Bool
+    +modifierLieu(Lieu): Bool
+}
+
+class Reponsemultiple{
+    -nom : String
+    -description : Textarea
+
+    +getid() : ? int
+    +getNom() : ? string
+    +setNom() : self
+    +getDescription() : ? string
+    +setDescription() : self
+
+    +ajouterLieu(Lieu) : Void
+    +supprimerLieu(Lieu) : Bool
+    +modifierLieu(Lieu): Bool
+}
+
+Activite  "1..*" -down-o "1"Utilisateur: [Participer]
+Activite  "1..*" -down-o "1"Lieu: [Localiser]
+Activite  "1..*" -down-o "1"Genre: [Appartenir]
+@enduml

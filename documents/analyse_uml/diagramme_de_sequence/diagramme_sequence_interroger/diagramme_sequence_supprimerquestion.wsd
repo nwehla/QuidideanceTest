@@ -1,0 +1,24 @@
+@startuml supprimerquestion
+autonumber 
+actor Administrateur #Black
+Administrateur -> Question : Afficher interface question
+activate Question #SkyBlue
+Question --> Administrateur : Interface affichée
+deactivate Question
+alt #GreenYellow Cas valide 
+Question <-- Administrateur : Accès à la page d'administration question
+else #IndianRed Cas problème
+Question --> Administrateur : Erreur server redirection sur la page d'accueil
+end
+Question -> Supprimer : Redirection sur la page
+Supprimer -> Validation : Afficher interface supprimer une question
+activate Validation #SkyBlue
+Validation --> Supprimer : Interface affichée
+deactivate Validation
+alt #GreenYellow Cas valdide 
+Supprimer --> Validation : Validation de la suppression. Accès à la page d'administration question
+Validation --> Question : Affichage du message "Suppression effectuéé avec succès"
+else #IndianRed Cas problème
+Supprimer <-- Validation : La suppression ne se valide pas. Redirection sur la page d'administration réponse. Affichage du message "Suppression non effectuéé"
+end
+@enduml
