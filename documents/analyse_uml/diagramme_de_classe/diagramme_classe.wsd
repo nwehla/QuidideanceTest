@@ -1,6 +1,6 @@
 @startuml
 
-class Questionnaire{
+class Sondage{
     -titre : String
     -question : String
     -description : Textarea
@@ -31,9 +31,9 @@ class Questionnaire{
     +getDatedefermeture() : ? datetime
     +setDatedefermeture() : self
 
-    +ajouterQuestion(Question) : Void
-    +supprimerQuestion(Question) : Bool
-    +modifierQuestion(Question): Bool
+    +ajouterSondage(Sondage) : Void
+    +supprimerSondage(Sondage) : Bool
+    +modifierSondage(Sondage): Bool
     +ajouterReponse(Reponse) : Void
     +supprimerReponse(Reponse) : Bool
     +modifierReponse(Reponse): Bool

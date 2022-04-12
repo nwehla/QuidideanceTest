@@ -28,12 +28,12 @@ package Interroger #RoyalBlue/LightBlue {
     ("Supprimer une question") as INTDELETE #White
     ("Voir une question") as INTSHOW #White
 }
-package Questionner #Orange/OrangeRed {
+package Sonder #Orange/OrangeRed {
 
-    ("Créer un questionnaire") as QUENEW #White
-    ("Modifier un questionnaire") as QUEEDIT #White
-    ("Supprimer un questionnaire") as QUEDELETE #White
-    ("Voir un questionnaire") as QUESHOW #White
+    ("Créer un sondage") as SONNEW #White
+    ("Modifier un sondage") as SONEDIT #White
+    ("Supprimer un sondage") as SONDELETE #White
+    ("Voir un sondage") as SONSHOW #White
 }
 
 package Répondre #Purple/MediumPurple {
@@ -54,6 +54,12 @@ package Authentifier #Grey/DarkGrey {
     ("Se déconnecter") as DEC #White
 }
 
+package Lier #Grey/DarkGrey {
+    ("Créer un lien Url") as LIENEW #White
+    ("Modifier un lien Url") as LIEEDIT #White
+    ("Supprimer un lien Url") as LIEDELETE #White
+    ("Voir un lien Url") as LIESHOW #White
+}
 
     SUPADMIN--|> ADMIN : Généralisation Super admin à admin
 
@@ -65,10 +71,10 @@ package Authentifier #Grey/DarkGrey {
 
 
 
-    ADMIN--->QUENEW #Gold : un admin ne pourra que créer son questionnaire
-    QUENEW<..-QUEEDIT #Gold : un admin ne pourra que modifier son questionnaire Include
-    QUENEW<..-QUEDELETE #Gold : un admin ne pourra que supprimer son questionnaire Include
-    QUENEW<..-QUESHOW #Gold : Include 
+    ADMIN--->SONNEW #Gold : un admin ne pourra que créer son sondage
+    SONNEW<..-SONEDIT #Gold : un admin ne pourra que modifier son sondage Include
+    SONNEW<..-SONDELETE #Gold : un admin ne pourra que supprimer son sondage Include
+    SONNEW<..-SONSHOW #Gold : Include 
 
     ADMIN--->INTNEW #Gold
     INTNEW<..-INTEDIT #Gold : Include
@@ -94,7 +100,7 @@ package Authentifier #Grey/DarkGrey {
     CON<.-DEC #White : Include
     SUPADMIN-.>CON #White : Include
     GER-.>CON #White : Include
-    QUENEW<..-INTNEW #White : Include
+    SONNEW<..-INTNEW #White : Include
     INTNEW<..-REPNEW #White : Include
     
     

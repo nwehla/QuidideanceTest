@@ -18,12 +18,12 @@ package Interroger #RoyalBlue/LightBlue {
     ("Modifier une question") as INTEDIT #White
     ("Supprimer une question") as INTDELETE #White
 }
-package Questionner #Orange/OrangeRed {
+package Sonder #Orange/OrangeRed {
 
-    ("Créer un questionnaire") as QUENEW #White
-    ("Modifier un questionnaire") as QUEEDIT #White 
-    ("Supprimer un questionnaire") as QUEDELETE #White
-    ("Voir un questionnaire") as QUESHOW #White
+    ("Créer un sondage") as SONNEW #White
+    ("Modifier un sondage") as SONEDIT #White 
+    ("Supprimer un sondage") as SONDELETE #White
+    ("Voir un sondage") as SONSHOW #White
 }
 
 package Répondre #Purple/MediumPurple {
@@ -35,10 +35,10 @@ package Répondre #Purple/MediumPurple {
 
     SUPADMIN--|> ADMIN : Généralisation Super admin à admin
 
-    ADMIN--->QUENEW #Black : un admin ne pourra que créer son questionnaire
-    QUENEW-..>QUEEDIT #Black : un admin ne pourra que modifier son questionnaire
-    QUENEW-..>QUEDELETE #Black : un admin ne pourra que supprimer son questionnaire
-    QUENEW-..>QUESHOW #Black   
+    ADMIN--->SONNEW #Black : un admin ne pourra que créer son sondage
+    SONNEW-..>SONEDIT #Black : un admin ne pourra que modifier son sondage
+    SONNEW-..>SONDELETE #Black : un admin ne pourra que supprimer son sondage
+    SONNEW-..>SONSHOW #Black   
 
     ADMIN--->INTNEW #Black
     INTNEW-..>INTEDIT #Black : Include
@@ -49,7 +49,7 @@ package Répondre #Purple/MediumPurple {
     REPNEW-..>REPEDIT #Black : Include
     REPNEW-..>REPDELETE #Black : Include
     
-    QUENEW<..-INTNEW #Black : Include
+    SONNEW<..-INTNEW #Black : Include
     INTNEW<..-REPNEW #Black : Include
     
     
