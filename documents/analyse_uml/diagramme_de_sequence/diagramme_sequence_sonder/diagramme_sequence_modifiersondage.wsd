@@ -1,31 +1,33 @@
-@startuml modifierquestionnaire
+@startuml modifiersondage
 autonumber 
 actor Administrateur #Black
-Administrateur -> Questionnaire : Afficher interface questionnaire
-activate Questionnaire #SkyBlue
-Questionnaire --> Administrateur : Interface affichée
-deactivate Questionnaire
+Administrateur -> Sondage : Afficher interface sondage
+activate Sondage #SkyBlue
+Sondage --> Administrateur : Interface affichée
+deactivate Sondage
 alt #GreenYellow Cas valdide 
-Questionnaire <-- Administrateur : Accès à la page d'administration questionnaire
+Sondage <-- Administrateur : Accès à la page d'administration sondage
 else #IndianRed Cas problème
-Questionnaire --> Administrateur : Erreur server redirection sur la page d'accueil
+Sondage --> Administrateur : Erreur server redirection sur la page d'accueil
 end
-Questionnaire -> Modifier : Redirection sur la page
-Modifier -> Validation : Afficher interface modifier un questionnaire
+Sondage -> Modifier : Redirection sur la page
+Modifier -> Validation : Afficher interface modifier un sondage
 activate Validation #SkyBlue
 Validation --> Modifier : Interface affichée
 loop #LightGrey Séquence enregistrement
 Administrateur ->> Validation : Modification des champs désirés (question, réponse)
-Administrateur ->> Validation : Sélection d'une date de début de validité du questionnaire
-Administrateur ->> Validation : Sélection d'une date de début de fin du questionnaire
+Administrateur ->> Validation : Sélection d'une date de début de validité du sondage
+Administrateur ->> Validation : Sélection d'une date de début de fin du sondage
+Administrateur ->> Validation : Sélection d'un statut du sondage
 Administrateur -> Validation : Cliquer sur Modifier
 Validation -[#Black]> Validation : Contrôle de saisie
 Validation --> Administrateur : Afficher exception
 end
 deactivate Validation
 alt #GreenYellow Cas valdide 
-Modifier --> Validation : Validation de la modification. Accès à la page d'administration questionnaire
-Validation --> Questionnaire : Affichage du message "Modification effectuéé avec succès"
+Modifier --> Validation : Validation de la modification. Accès à la page d'administration sondage
+Validation --> Sondage : Mise à jour de la date
+Validation --> Sondage : Affichage du message "Modification effectuéé avec succès"
 else #IndianRed Cas problème
 Modifier <-- Validation : Erreur server redirection sur la page d'accueil
 Modifier <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"

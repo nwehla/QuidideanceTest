@@ -1,0 +1,38 @@
+@startuml creersondage
+autonumber 
+actor Administrateur #Black
+Administrateur -> Sondage : Afficher interface sondage
+activate Sondage #SkyBlue
+Sondage --> Administrateur : Interface affichée
+deactivate Sondage
+alt #GreenYellow Cas valide 
+Sondage <-- Administrateur : Accès à la page d'administration d'un sondage
+else #IndianRed Cas problème
+Sondage --> Administrateur : Erreur server redirection sur la page d'accueil
+end
+Sondage -> Créer : Redirection sur la page
+Créer -> Validation : Afficher interface créer un sondage
+activate Validation #SkyBlue
+Validation --> Créer : Interface affichée
+loop #LightGrey Séquence enregistrement
+Administrateur ->> Validation : Ajout de question
+Administrateur ->> Validation : Ajout de réponse
+Administrateur ->> Validation : Sélection d'une date de début pour valider le sondage
+Administrateur ->> Validation : Sélection d'une date de fin pour valider le sondage
+Administrateur ->> Validation : Sélection d'un statut(brouillon,ouvert,fermé) pour le sondage
+Administrateur -> Validation : Cliquer sur Enregistrer
+Validation -[#Black]> Validation : Contrôle de saisie
+Validation --> Administrateur : Afficher exception
+end
+deactivate Validation
+alt #GreenYellow Cas valide 
+Créer --> Validation : Validation de l'enregistrement. Accès à la page d'administration sondage
+Validation --> Sondage : Affichage du message "Ajout créé avec succès"
+else #IndianRed Cas problème
+Créer <-- Validation : Erreur server redirection sur la page d'accueil
+Créer <-- Validation : Erreur lors de la saisie des champs. Affichage d'un message "Veuillez remplir les champs signalés !"
+Créer <-- Validation : Erreur lors de la sélection d'une date. Affichage d'un message "Veuillez sélectionner d'une date !"
+Créer <-- Validation : Erreur lors de la sélection d'un statut. Affichage d'un message "Veuillez sélectionner un statut !" 
+Créer <-- Validation : Erreur lors de la validation de l'enregistrement. Affichage d'un message 
+end
+@enduml

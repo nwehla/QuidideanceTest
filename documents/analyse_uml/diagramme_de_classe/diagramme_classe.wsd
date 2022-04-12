@@ -123,9 +123,9 @@ class Utilisateur{
     +modifierUtilisateur(Utilisateur): Bool
 }
 
-Questionnaire  "1..*" o-down-o "1..1"Reponse: [Participer]
-Questionnaire  "1..*" o-down-o "1..1"Interroger: [Presenter]
+Sondage  "1..*" o-down-o "1..1"Reponse: [Participer]
+Sondage  "1..*" o-down-o "1..1"Interroger: [Presenter]
 Reponse  "1..*" o-down-o "1..*"Interroger: [Choisir]
-Questionnaire  "0..1" o-down-o "1..1"Url: [Comporter]
+Sondage  "0..1" o-down-o "1..1"Url: [Comporter]
 
 @enduml

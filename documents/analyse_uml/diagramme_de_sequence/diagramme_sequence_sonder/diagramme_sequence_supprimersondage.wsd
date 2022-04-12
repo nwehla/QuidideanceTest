@@ -1,0 +1,24 @@
+@startuml supprimersondage
+autonumber 
+actor Administrateur #Black
+Administrateur -> Sondage : Afficher interface sondage
+activate Sondage #SkyBlue
+Sondage --> Administrateur : Interface affichée
+deactivate Sondage
+alt #GreenYellow Cas valide 
+Sondage <-- Administrateur : Accès à la page d'administration sondage
+else #IndianRed Cas problème
+Sondage --> Administrateur : Erreur server redirection sur la page d'accueil
+end
+Sondage -> Supprimer : Redirection sur la page
+Supprimer -> Validation : Afficher interface supprimer un sondage
+activate Validation #SkyBlue
+Validation --> Supprimer : Interface affichée
+deactivate Validation
+alt #GreenYellow Cas valdide 
+Supprimer --> Validation : Validation de la suppression. Accès à la page d'administration sondage
+Validation --> Sondage : Affichage du message "Suppression effectuéé avec succès"
+else #IndianRed Cas problème
+Supprimer <-- Validation : Erreur server redirection sur la page d'accueil
+end
+@enduml

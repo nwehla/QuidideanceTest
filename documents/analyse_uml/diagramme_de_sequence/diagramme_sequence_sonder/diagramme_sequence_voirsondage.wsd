@@ -1,0 +1,23 @@
+@startuml voirsondage
+autonumber 
+actor Administrateur #Black
+Administrateur -> Sondage : Afficher interface sondage
+activate Sondage #SkyBlue
+Sondage --> Administrateur : Interface affichée
+deactivate Sondage
+alt #GreenYellow Cas valide 
+Sondage <-- Administrateur : Accès à la page d'administration sondage
+else #IndianRed Cas problème
+Sondage --> Administrateur : Erreur server redirection sur la page d'accueil
+end
+Sondage -> Voir : Redirection sur la page
+Voir -> Validation : Afficher interface voir un sondage
+activate Validation #SkyBlue
+Validation --> Voir : Interface affichée
+deactivate Validation
+alt #GreenYellow Cas valdide 
+Voir --> Validation : Redirection à la page voir du sondage
+else #IndianRed Cas problème
+Voir <-- Validation : Erreur server redirection sur la page d'accueil
+end
+@enduml
