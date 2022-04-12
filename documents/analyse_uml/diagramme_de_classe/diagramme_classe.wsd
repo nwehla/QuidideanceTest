@@ -69,6 +69,30 @@ class Reponse{
     +modifierReponse(Reponse): Bool    
 }
 
+class Interroger{
+    -intitule : String
+
+    +getid() : ? int
+    +getIntitule() : ? string
+    +setIntitule() : self
+
+    +ajouterInterroger(Interroger) : Void
+    +supprimerInterroger(Interroger) : Bool
+    +modifierInterroger(Interroger): Bool
+}
+
+class Url{
+    -url : String
+
+    +getid() : ? int
+    +getUrl() : ? string
+    +setUrl() : self
+
+    +ajouterUrl(Url) : Void
+    +supprimerUrl(Url) : Bool
+    +modifierUrl(Url): Bool
+}
+
 class Utilisateur{
     -prenom : String
     -email : Email
@@ -99,8 +123,9 @@ class Utilisateur{
     +modifierUtilisateur(Utilisateur): Bool
 }
 
-' exemple de relation
-' Activite  "1..*" -down-o "1"Utilisateur: [Participer]
-' Activite  "1..*" -down-o "1"Lieu: [Localiser]
-' Activite  "1..*" -down-o "1"Genre: [Appartenir]
+Questionnaire  "1..*" o-down-o "1..1"Reponse: [Participer]
+Questionnaire  "1..*" o-down-o "1..1"Interroger: [Presenter]
+Reponse  "1..*" o-down-o "1..*"Interroger: [Choisir]
+Questionnaire  "0..1" o-down-o "1..1"Url: [Comporter]
+
 @enduml
