@@ -1,0 +1,9 @@
+Lundi 4 avril vendredi 8 avril
+
+Après avoir échangé avec notre formateur nous avons
+apportés des correctifs sur :
+    - Les cas d'utilisations
+    - Les séquentiels
+    - Les textuels
+Nous avons également débutés le diagramme de classe pour mettre
+en évidence les entités (avec leurs champs) et les relations entre elles.
