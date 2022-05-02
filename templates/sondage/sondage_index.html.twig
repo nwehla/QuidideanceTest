@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des sondages{% endblock %}
+
+{% block content %}
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+
+<div class="py-3" id="3">
+    <a href="{{ path('app_sondage_new') }}" class="btn btn-success mt-3">Nouveau sondage</a>
+
+</div>
+
+<div class="jumbotron text-center py-3">
+    <h1>Gestion des sondages</h1>
+</div>
+</br>
+    
+<div class="py-3">
+    <table class="table table-striped">
+        <thead>
+            <th>Titre</th>
+            <th>Question</th>
+            <th>Description</th>
+            <th>Multiple</th>
+            <th>Statut</th>
+            <th>Message de fermeture</th>
+            <th>Date de creation</th>
+            <th>Date mise à jour</th>
+            <th>Date de fermeture</th>
+            <th>Voir</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>         
+        </thead>
+        <tbody>
+        {% for sondage in sondages %}
+            <tr>
+                <td>{{ sondage.titre }}</td>
+                <td>{{ sondage.question }}</td>
+                <td>{{ sondage.description }}</td>
+                <td>{{ sondage.multiple ? 'Yes' : 'No' }}</td>
+                <td>{{ sondage.statut }}</td>
+                <td>{{ sondage.messagefermeture }}</td>
+                <td>{{ sondage.datecreation ? sondage.datecreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ sondage.datemisajour ? sondage.datemisajour|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ sondage.datedefermeture ? sondage.datedefermeture|date('Y-m-d H:i:s') : '' }}</td>
+                
+                <td>
+                    <a href="{{ path('app_sondage_show', {'id': sondage.id}) }}" class="btn btn-dark mt-3">Voir</a>
+                </td>
+                <td>
+                    <a href="{{ path('app_sondage_edit', {'id': sondage.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+                </td>
+                <td>
+                    {{ include('sondage/_delete_form.html.twig') }}
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Pas d'enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+    
+{% endblock %}

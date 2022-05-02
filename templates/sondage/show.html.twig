@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sondage{% endblock %}
+
+{% block content %}
+   <div class="py-3">
+    <a href="{{ path('app_sondage_index') }}" class="btn btn-primary mt-3">Retour au tableau des sondages</a>
+
+   </div>
+    <div class="jumbotron text-center py-3">
+        <h1>Sondage</h1>
+    </div>
+    <div class="py-3">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Titre</th>
+                    <td>{{ sondage.titre }}</td>
+                </tr>
+                <tr>
+                    <th>Question</th>
+                    <td>{{ sondage.question }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ sondage.description }}</td>
+                </tr>
+                <tr>
+                    <th>Multiple</th>
+                    <td>{{ sondage.multiple ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>Statut</th>
+                    <td>{{ sondage.statut }}</td>
+                </tr>
+                <tr>
+                    <th>Messagefermeture</th>
+                    <td>{{ sondage.messagefermeture }}</td>
+                </tr>
+                <tr>
+                    <th>Datecreation</th>
+                    <td>{{ sondage.datecreation ? sondage.datecreation|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Datemisajour</th>
+                    <td>{{ sondage.datemisajour ? sondage.datemisajour|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Datedefermeture</th>
+                    <td>{{ sondage.datedefermeture ? sondage.datedefermeture|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>       
+            </tbody>
+        </table>      
+    </div>
+{% endblock %}

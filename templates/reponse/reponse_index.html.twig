@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des réponses{% endblock %}
+
+{% block content %}
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+
+<div class="py-3" id="3">
+    <a href="{{ path('app_reponse_new') }}" class="btn btn-success mt-3">Nouvelle réponse</a>
+
+</div>
+
+<div class="jumbotron text-center py-3">
+    <h1>Gestion des réponses</h1>
+</div>
+</br>
+    
+<div class="py-3">
+    <table class="table table-striped">
+        <thead>
+            <th>Repondant</th>
+            <th>Commentaire</th>
+            <th>Email</th>
+            <th>Acceptation de partage de données</th>
+            <th>Date de création</th>
+            <th>Date de mise à jour</th>
+            <th>Date de fermeture</th>
+            <th>Voir</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>         
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+                <td>{{ reponse.repondant }}</td>
+                <td>{{ reponse.commentaire }}</td>
+                <td>{{ reponse.email }}</td>
+                <td>{{ reponse.acceptationpartagedonnee ? 'Oui' : 'Non' }}</td>
+                <td>{{ reponse.datecreation ? reponse.datecreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reponse.datemiseajour ? reponse.datemiseajour|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reponse.datefermeture ? reponse.datefermeture|date('Y-m-d H:i:s') : '' }}</td>                
+                <td>
+                    <a href="{{ path('app_reponse_show', {'id': reponse.id}) }}" class="btn btn-dark mt-3">Voir</a>
+                </td>
+                <td>
+                    <a href="{{ path('app_reponse_edit', {'id': reponse.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+                </td>
+                <td>
+                    {{ include('reponse/_delete_form.html.twig') }}
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Pas d'enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+    
+{% endblock %}

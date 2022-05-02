@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel{% endblock %}
+
+{% block content %}
+<div class="py-3">
+    <a href="{{ path('app__index') }}" class="btn btn-primary mt-3">Retour au tableau</a>
+
+</div>
+    <div class="jumbotron text-center py-3">
+        <h1>Ajout d'un</h1>
+    </div>
+    <div class="py-3">
+        {{ include('/_form.html.twig') }}
+
+    </div>
+{% endblock %}

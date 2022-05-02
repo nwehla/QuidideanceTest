@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des admins{% endblock %}
+
+{% block content %}
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+
+<div class="py-3" id="3">
+    <a href="{{ path('app_utilisateur_new') }}" class="btn btn-success mt-3">Nouvel admin</a>
+
+</div>
+
+<div class="jumbotron text-center py-3">
+    <h1>Gestion des admins</h1>
+</div>
+</br>
+    
+<div class="py-3">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Roles</th>
+                {# <th>Slug</th> #}
+                <th>Date de création</th>
+                <th>Date de mise à jour</th>
+                <th>Voir</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td>{{ utilisateur.username }}</td>
+                <td>{{ utilisateur.email }}</td>
+                <td>{{ utilisateur.password }}</td>
+                <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
+                {# <td>{{ utilisateur.slug }}</td> #}
+                <td>{{ utilisateur.datecreation ? utilisateur.datecreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ utilisateur.datemiseajour ? utilisateur.datemiseajour|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}" class="btn btn-dark mt-3">Voir</a>
+                </td>
+                <td>
+                    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+                </td>
+                <td>
+                    {{ include('utilisateur/_delete_form.html.twig') }}
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Pas d'enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+    
+{% endblock %}
