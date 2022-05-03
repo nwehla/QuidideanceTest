@@ -5,6 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
@@ -44,7 +47,7 @@ class Utilisateur implements UserInterface
     private $datemiseajour;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)     
      */
     private $username;
 
@@ -149,6 +152,9 @@ class Utilisateur implements UserInterface
 
         return $this;
     }
+    
+    
+    
 
 
 }
