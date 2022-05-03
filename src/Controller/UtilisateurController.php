@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @Route("/admin/utilisateur")
@@ -28,13 +30,25 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/new", name="app_utilisateur_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, UtilisateurRepository $utilisateurRepository): Response
+    public function new(Request $request, UtilisateurRepository $utilisateurRepository, UserPasswordHasherInterface $encoder,EntityManagerInterface $manager): Response
     {
         $utilisateur = new Utilisateur();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $utilisateur = $form->getData();
+         
+            //Encodage du mot de passe
+            $password = $encoder->hashPassword($utilisateur , $utilisateur->getPassword());
+            
+            $utilisateur->setPassword($password);
+            
+            //Persist
+            $manager->persist($utilisateur);
+            
+            //Flush
+            $manager->flush(); 
             $utilisateurRepository->add($utilisateur);
             $this->addFlash("success","La création a été effectuée");
             return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
