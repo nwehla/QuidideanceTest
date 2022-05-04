@@ -79,8 +79,6 @@ class UtilisateurType extends AbstractType
                 ],
             ])
             // // ->add('slug')
-            // ->add('datecreation')
-            // ->add('datemiseajour')
         ;
 
         $builder->get('roles')
