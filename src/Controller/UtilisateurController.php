@@ -6,6 +6,7 @@ use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,6 +44,8 @@ class UtilisateurController extends AbstractController
             $password = $encoder->hashPassword($utilisateur , $utilisateur->getPassword());
             
             $utilisateur->setPassword($password);
+            //initialisation de la date de creation 
+            $utilisateur->setDatecreation(new DateTime());
             
             //Persist
             $manager->persist($utilisateur);

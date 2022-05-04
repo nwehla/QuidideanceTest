@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -36,10 +37,11 @@ class UtilisateurType extends AbstractType
             ->add('email', EmailType::class,[
                 'label' => 'Email' ,
                 'attr' => ['placeholder' => 'Email'],
-                'constraints' => [
-                    new UniqueEntity(['fields' => ["email"]])
+                'invalid_message' => 'Cet email est déjà pris ' ,
+                //'constraints' => [
+                    //new UniqueEntity(['fields' => ["email"]])
                     // 'message' => 'Cet email est déjà pris'
-                ],
+                //],
                 'required' => 'true'
             ])         
             ->add('password' , RepeatedType::class , [
