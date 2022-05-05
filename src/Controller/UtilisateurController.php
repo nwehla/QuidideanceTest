@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Form\UtilisateurModifierType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
-use DateTime;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,9 +25,14 @@ class UtilisateurController extends AbstractController
      */
     public function index(UtilisateurRepository $utilisateurRepository): Response
     {
+        if ($this->isGranted('ROLE_SUPERADMIN')) {
         return $this->render('utilisateur/utilisateur_index.html.twig', [
             'utilisateurs' => $utilisateurRepository->findAll(),
         ]);
+        }
+        else{
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+        }
     }
 
     /**
@@ -33,6 +40,7 @@ class UtilisateurController extends AbstractController
      */
     public function new(Request $request, UtilisateurRepository $utilisateurRepository, UserPasswordHasherInterface $encoder,EntityManagerInterface $manager): Response
     {
+        if ($this->isGranted('ROLE_SUPERADMIN')) {
         $utilisateur = new Utilisateur();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
@@ -61,6 +69,10 @@ class UtilisateurController extends AbstractController
             'utilisateur' => $utilisateur,
             'form' => $form->createView(),
         ]);
+        }
+        else{
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+        }
     }
 
     /**
@@ -68,20 +80,34 @@ class UtilisateurController extends AbstractController
      */
     public function show(Utilisateur $utilisateur): Response
     {
+        if ($this->isGranted('ROLE_SUPERADMIN')) {
         return $this->render('utilisateur/show.html.twig', [
             'utilisateur' => $utilisateur,
         ]);
+        }
+        else{
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+        }
     }
 
     /**
      * @Route("/{id}/edit", name="app_utilisateur_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository): Response
+    public function edit(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $manager): Response
     {
-        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        if ($this->isGranted('ROLE_SUPERADMIN')) {
+        $form = $this->createForm(UtilisateurModifierType::class, $utilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //initialisation de la date de creation 
+            $utilisateur->setDatemiseajour(new DateTime());
+            
+            //Persist
+            $manager->persist($utilisateur);
+             
+            //Flush
+            $manager->flush();
             $utilisateurRepository->add($utilisateur);
             $this->addFlash("success","La modification a été effectuée");
             return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
@@ -91,6 +117,10 @@ class UtilisateurController extends AbstractController
             'utilisateur' => $utilisateur,
             'form' => $form->createView(),
         ]);
+        }
+        else{
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+        }
     }
 
     /**
@@ -98,11 +128,16 @@ class UtilisateurController extends AbstractController
      */
     public function delete(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository): Response
     {
+        if ($this->isGranted('ROLE_SUPERADMIN')) {
         if ($this->isCsrfTokenValid('delete'.$utilisateur->getId(), $request->request->get('_token'))) {
             $utilisateurRepository->remove($utilisateur);
             $this->addFlash("success","La suppression a été effectuée");
         }
 
         return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+    }
+    else{
+        return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+    }
     }
 }
