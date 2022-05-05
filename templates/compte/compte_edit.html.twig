@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du compte{% endblock %}
+
+{% block content %}
+<div class="py-3">
+    {# <a href="{{ path('compte_index') }}" class="btn btn-primary mt-3">Retour à mon compte</a> #}
+
+</div>
+    <div class="jumbotron text-center py-3">
+        <h1> Modification du compte</h1>
+    </div>
+    <div class="py-3">
+        {{ include('compte/_form.html.twig', {'button_label': 'Modifier'}) }}
+    </div>
+{% endblock %}
