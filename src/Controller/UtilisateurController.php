@@ -5,7 +5,6 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
-use Doctrine\ORM\EntityManager;
 use App\Form\UtilisateurModifierType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
@@ -13,8 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Guard\AuthenticatorInterface;
 
 /**
  * @Route("/admin/utilisateur")
@@ -22,7 +23,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UtilisateurController extends AbstractController
 {
     public function uniqidReal($lenght = 13) {
-        // uniqid donne 13 ccaratères, mais pouvez ajuster si vous voulez.
+        // uniqid donne 13 caratères, mais pouvez ajuster si vous voulez.
         if (function_exists("random_bytes")) {
             $bytes = random_bytes(ceil($lenght / 2));
         } elseif (function_exists("openssl_random_pseudo_bytes")) {
@@ -66,8 +67,13 @@ class UtilisateurController extends AbstractController
        //on supprime le token.
        $utilisateur->setActivateToken(null);
        //on persist
-       $manager->persit($utilisateur);
+       $manager->persist($utilisateur);
+       //on flush
        $manager->flush($utilisateur);
+       //on envoie un message flash.
+       $this->addflash('message','Vous avez bien activé votre compte');
+       //on retourne à l'accueil.
+       return $this->redirectToRoute('accueil');
 
 
     }
@@ -76,7 +82,8 @@ class UtilisateurController extends AbstractController
     /**
      * @Route("/new", name="app_utilisateur_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, UtilisateurRepository $utilisateurRepository, UserPasswordHasherInterface $encoder,EntityManagerInterface $manager): Response
+    public function new(Request $request, UtilisateurRepository $utilisateurRepository, UserPasswordHasherInterface $encoder,EntityManagerInterface $manager,
+    \Swift_Mailer $mailer,GuardAuthenticatorHandler $guardHandler,AuthenticatorInterface $authenticator): Response
     {
         if ($this->isGranted('ROLE_SUPERADMIN')) {
         $utilisateur = new Utilisateur();
@@ -101,6 +108,28 @@ class UtilisateurController extends AbstractController
             
             //Flush
             $manager->flush(); 
+            //on créé le message d'activation de compte
+            $message = (new \Swift_Message('Activation de votre compte'))
+                ->setFrom('votreadresse@.fr')
+            //on attribue le destinataire
+                    ->setTo($utilisateur->getEmail())
+            //on créé le contenu
+                ->setBody(
+                    $this->renderView('email/activation.html.twig' ,['token' => $utilisateur->getActivationToken()]
+                ),
+                'text/html'
+                )
+                ;
+                //on envoie l'email
+                $mailer->send($message);
+                return $guardHandler->authenticateUserAndHandleSuccess(
+                    $utilisateur,
+                    $request,
+                    $authenticator,
+                    'main' //firewall nom dans security.yaml
+                );
+                
+
             $utilisateurRepository->add($utilisateur);
             $this->addFlash("success","La création a été effectuée");
             return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
