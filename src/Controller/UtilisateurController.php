@@ -83,7 +83,7 @@ class UtilisateurController extends AbstractController
      * @Route("/new", name="app_utilisateur_new", methods={"GET", "POST"})
      */
     public function new(Request $request, UtilisateurRepository $utilisateurRepository, UserPasswordHasherInterface $encoder,EntityManagerInterface $manager,
-    \Swift_Mailer $mailer,GuardAuthenticatorHandler $guardHandler,AuthenticatorInterface $authenticator): Response
+    \Swift_Mailer $mailer): Response
     {
         if ($this->isGranted('ROLE_SUPERADMIN')) {
         $utilisateur = new Utilisateur();
@@ -101,7 +101,7 @@ class UtilisateurController extends AbstractController
             $utilisateur->setDatecreation(new DateTime());
             //initialisation du token et cryptage de celui-ci
             $utilisateur->setActivateToken(md5($this->uniqidReal()));
-            dd($utilisateur);
+            // dd($utilisateur);
             
             //Persist
             $manager->persist($utilisateur);
@@ -110,24 +110,24 @@ class UtilisateurController extends AbstractController
             $manager->flush(); 
             //on créé le message d'activation de compte
             $message = (new \Swift_Message('Activation de votre compte'))
-                ->setFrom('votreadresse@.fr')
+                ->setFrom('angelus31101981@hotmail.com')
             //on attribue le destinataire
                     ->setTo($utilisateur->getEmail())
             //on créé le contenu
                 ->setBody(
-                    $this->renderView('email/activation.html.twig' ,['token' => $utilisateur->getActivationToken()]
+                    $this->renderView('email/activation.html.twig' ,['token' => $utilisateur->getActivateToken()]
                 ),
                 'text/html'
                 )
                 ;
                 //on envoie l'email
                 $mailer->send($message);
-                return $guardHandler->authenticateUserAndHandleSuccess(
-                    $utilisateur,
-                    $request,
-                    $authenticator,
-                    'main' //firewall nom dans security.yaml
-                );
+                // return $guardHandler->authenticateUserAndHandleSuccess(
+                //     $utilisateur,
+                //     $request,
+                //     $authenticator,
+                //     'main' //firewall nom dans security.yaml
+                // );
                 
 
             $utilisateurRepository->add($utilisateur);
