@@ -57,6 +57,11 @@ class Utilisateur implements UserInterface
      */
     private $username;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $activate_token;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -155,6 +160,18 @@ class Utilisateur implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getActivateToken(): ?string
+    {
+        return $this->activate_token;
+    }
+
+    public function setActivateToken(?string $activate_token): self
+    {
+        $this->activate_token = $activate_token;
 
         return $this;
     }

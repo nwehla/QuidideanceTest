@@ -5,13 +5,14 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use Doctrine\ORM\EntityManager;
 use App\Form\UtilisateurModifierType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -20,6 +21,18 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UtilisateurController extends AbstractController
 {
+    public function uniqidReal($lenght = 13) {
+        // uniqid donne 13 ccaratères, mais pouvez ajuster si vous voulez.
+        if (function_exists("random_bytes")) {
+            $bytes = random_bytes(ceil($lenght / 2));
+        } elseif (function_exists("openssl_random_pseudo_bytes")) {
+            $bytes = openssl_random_pseudo_bytes(ceil($lenght / 2));
+        } else {
+            throw new Exception("no cryptographically secure random function available");
+        }
+        return substr(bin2hex($bytes), 0, $lenght);
+    }
+    
     /**
      * @Route("/", name="app_utilisateur_index", methods={"GET"})
      */
@@ -34,6 +47,31 @@ class UtilisateurController extends AbstractController
             return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
         }
     }
+    // creation d'une fonction d'activation du token
+/**
+ * @Route("/activation/{token}", name="activation")
+ */
+    public function gestionToken($token,UtilisateurRepository $repo,EntityManagerInterface $manager)
+    {
+       //on verifie si un utilisateur a ce token
+       $utilisateur = $repo->findOneBy(['activation_token' => $token]);
+       
+       //si aucun utilisateur n'existe pas avec ce token.$_COOKIE
+       if(!$utilisateur)
+       {
+           //Erreur 404
+           throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
+       }
+       
+       //on supprime le token.
+       $utilisateur->setActivateToken(null);
+       //on persist
+       $manager->persit($utilisateur);
+       $manager->flush($utilisateur);
+
+
+    }
+
 
     /**
      * @Route("/new", name="app_utilisateur_new", methods={"GET", "POST"})
@@ -54,6 +92,9 @@ class UtilisateurController extends AbstractController
             $utilisateur->setPassword($password);
             //initialisation de la date de creation 
             $utilisateur->setDatecreation(new DateTime());
+            //initialisation du token et cryptage de celui-ci
+            $utilisateur->setActivateToken(md5($this->uniqidReal()));
+            dd($utilisateur);
             
             //Persist
             $manager->persist($utilisateur);
