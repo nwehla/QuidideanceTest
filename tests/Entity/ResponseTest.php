@@ -6,7 +6,7 @@ use App\Entity\Reponse;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 
-class UtilisateurTest extends TestCase
+class ReponseTest extends TestCase
 {
     public function testValide(): void
     {
