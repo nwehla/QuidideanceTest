@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modification de vos informations Personnelles {% endblock %}
+
+
+{% block content %}
+<div class="py-3">
+    <a href="{{ path('compte') }}" class="btn btn-primary mt-3">Retour a la page mon compte</a>
+
+</div>
+    <div class="jumbotron text-center py-3">
+        <h1> Modification de mes informations Personnelles</h1>
+    </div>
+    <div class="py-3">
+        {{ form_start(formModifierCompte)}}
+        {{ form_widget(formModifierCompte)}}
+        <input type="submit"value="Modifier"class="btn btn-warning mg-3">
+        {{ form_end(formModifierCompte)}}
+        
+    </div>
+{% endblock %}

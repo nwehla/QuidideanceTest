@@ -39,14 +39,14 @@ class UtilisateurController extends AbstractController
      */
     public function index(UtilisateurRepository $utilisateurRepository): Response
     {
-        if ($this->isGranted('ROLE_SUPERADMIN')) {
+         if ($this->isGranted('ROLE_SUPERADMIN')) {
         return $this->render('utilisateur/utilisateur_index.html.twig', [
             'utilisateurs' => $utilisateurRepository->findAll(),
         ]);
-        }
-        else{
+         }
+         else{
             return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
-        }
+         }
     }
     // creation d'une fonction d'activation du token
 /**
@@ -85,7 +85,7 @@ class UtilisateurController extends AbstractController
     public function new(Request $request, UtilisateurRepository $utilisateurRepository, UserPasswordHasherInterface $encoder,EntityManagerInterface $manager,
     \Swift_Mailer $mailer): Response
     {
-        if ($this->isGranted('ROLE_SUPERADMIN')) {
+         if ($this->isGranted('ROLE_SUPERADMIN')) {
         $utilisateur = new Utilisateur();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
@@ -139,8 +139,8 @@ class UtilisateurController extends AbstractController
             'utilisateur' => $utilisateur,
             'form' => $form->createView(),
         ]);
-        }
-        else{
+         }
+         else{
             return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
         }
     }
