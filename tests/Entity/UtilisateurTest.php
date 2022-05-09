@@ -25,7 +25,7 @@ class UtilisateurTest extends TestCase
         //voir si les assert sont vrai        
         $this->assertTrue($utilisateur->getEmail() === "Valdo@toto.fr");
         $this->assertTrue($utilisateur->getPassword() === "Valdo@1974");     
-        $this->assertTrue($utilisateur->getRoles() === "ROLE_SUPERADMIN");     
+        $this->assertTrue($utilisateur->getRoles() === ["ROLE_SUPERADMIN"]);     
         $this->assertTrue($utilisateur->getDatecreation() === $date);     
         $this->assertTrue($utilisateur->getDatemiseajour() === $date);     
         $this->assertTrue($utilisateur->getUsername() === "Valéry");     
@@ -48,7 +48,7 @@ class UtilisateurTest extends TestCase
         // $this->assertFalse(false);
         $this->assertFalse($utilisateur->getEmail() !== "Valdo@toto.fr");
         $this->assertFalse($utilisateur->getPassword() !== "Valdo@1974");     
-        $this->assertFalse($utilisateur->getRoles() !== "ROLE_SUPERADMIN");     
+        $this->assertFalse($utilisateur->getRoles() !== ["ROLE_SUPERADMIN"]);     
         $this->assertFalse($utilisateur->getDatecreation() !== $date);     
         $this->assertFalse($utilisateur->getDatemiseajour() !== $date);     
         $this->assertFalse($utilisateur->getUsername() !== "Valéry");     

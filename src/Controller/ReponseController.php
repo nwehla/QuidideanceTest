@@ -2,13 +2,15 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Reponse;
 use App\Form\ReponseType;
 use App\Repository\ReponseRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin/reponse")
@@ -28,13 +30,19 @@ class ReponseController extends AbstractController
     /**
      * @Route("/new", name="app_reponse_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, ReponseRepository $reponseRepository): Response
+    public function new(Request $request, ReponseRepository $reponseRepository,EntityManagerInterface $manager): Response
     {
         $reponse = new Reponse();
         $form = $this->createForm(ReponseType::class, $reponse);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reponse->setDatecreation(new DateTime());            
+            //Persist
+            $manager->persist($reponse);
+            
+            //Flush
+            $manager->flush(); 
             $reponseRepository->add($reponse);
             $this->addFlash("success","La création a été effectuée");
             return $this->redirectToRoute('app_reponse_index', [], Response::HTTP_SEE_OTHER);
@@ -59,12 +67,18 @@ class ReponseController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_reponse_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Reponse $reponse, ReponseRepository $reponseRepository): Response
+    public function edit(Request $request, Reponse $reponse, ReponseRepository $reponseRepository, EntityManagerInterface $manager): Response
     {
         $form = $this->createForm(ReponseType::class, $reponse);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $reponse->setDatemiseajour(new DateTime());          
+            //Persist
+            $manager->persist($reponse);
+            
+            //Flush
+            $manager->flush();
             $reponseRepository->add($reponse);
             $this->addFlash("success","La modification a été effectuée");
             return $this->redirectToRoute('app_reponse_index', [], Response::HTTP_SEE_OTHER);
