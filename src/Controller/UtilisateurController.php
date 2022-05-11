@@ -5,17 +5,19 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use Symfony\Component\Mime\Email;
 use App\Form\UtilisateurModifierType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Security\Guard\AuthenticatorInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Guard\AuthenticatorInterface;
 
 /**
  * @Route("/admin/utilisateur")
@@ -83,7 +85,7 @@ class UtilisateurController extends AbstractController
      * @Route("/new", name="app_utilisateur_new", methods={"GET", "POST"})
      */
     public function new(Request $request, UtilisateurRepository $utilisateurRepository, UserPasswordHasherInterface $encoder,EntityManagerInterface $manager,
-    \Swift_Mailer $mailer): Response
+    MailerInterface $mailer): Response
     {
          if ($this->isGranted('ROLE_SUPERADMIN')) {
         $utilisateur = new Utilisateur();
@@ -109,25 +111,41 @@ class UtilisateurController extends AbstractController
             //Flush
             $manager->flush(); 
             //on créé le message d'activation de compte
-            $message = (new \Swift_Message('Activation de votre compte'))
-                ->setFrom('angelus31101981@hotmail.com')
-            //on attribue le destinataire
-                    ->setTo($utilisateur->getEmail())
-            //on créé le contenu
-                ->setBody(
-                    $this->renderView('email/activation.html.twig' ,['token' => $utilisateur->getActivateToken()]
-                ),
-                'text/html'
-                )
-                ;
-                //on envoie l'email
-                $mailer->send($message);
+            // $message = (new Email('Activation de votre compte'))
+            //     ->setFrom('angelus31101981@hotmail.com')
+            // //on attribue le destinataire
+            //         ->setTo($utilisateur->getEmail())
+            // //on créé le contenu
+            //     ->setBody(
+            //         $this->renderView('email/activation.html.twig' ,['token' => $utilisateur->getActivateToken()]
+            //     ),
+            //     'text/html'
+            //     )
+            //     ;
+            //     //on envoie l'email
+            //     $mailer->send($message);
                 // return $guardHandler->authenticateUserAndHandleSuccess(
                 //     $utilisateur,
                 //     $request,
                 //     $authenticator,
                 //     'main' //firewall nom dans security.yaml
                 // );
+            $message = (new Email())
+                ->From('angelus31101981@hotmail.com')
+            //on attribue le destinataire
+                ->To($utilisateur->getEmail())
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            //on créé le contenu
+                ->subject('Confirmation')
+                ->text('MONQ')
+                ->html($this->renderView('email/activation.html.twig' ,['token' => $utilisateur->getActivateToken()])
+                )
+                ;
+                //on envoie l'email
+                $mailer->send($message);
                 
 
             $utilisateurRepository->add($utilisateur);

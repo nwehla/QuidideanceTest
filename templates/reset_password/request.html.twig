@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset password{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center py-3 text-dark">
+    <h1>récupération de votre email pour réinitialisation de votre mot de passe</h1>
+</div>    
+
+<div class='login_register_wrap section'>
+    <div class='container'>
+        <div class='row justify-content-center'>
+            <div class='col-xl-6 col-md-10'>
+                <div class='login_wrap'>
+                    <div class='padding_eight_all bg-white'>
+                        <div class='heading_s1'>
+                        </div>
+                        <div class='content'>
+                            <div class='message-flash'>
+                                {% for flash_error in app.flashes('reset_password_error') %}
+                                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                                {% endfor %}
+                            </div>
+                            {{ form_start(requestForm) }}
+                                {{ form_row(requestForm.email) }}
+                                <div>
+                                    <small>
+                                        Entrer votre adresse email et nous vous enverrons
+                                        un lien pour réinitialisé votre mot de passe.                                        
+                                    </small>
+                                </div>
+                                <button class="btn btn-primary">Envoyer</button>
+                            {{ form_end(requestForm) }}                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+<p class="text-center">Si vous ne recevez aucun email regarder dans vos spam ou <a href="{{ path('app_forgot_password_request') }}">recommencer encore</a>.</p>
+{% endblock %}
