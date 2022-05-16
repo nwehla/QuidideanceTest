@@ -62,6 +62,11 @@ class Utilisateur implements UserInterface
      */
     private $activate_token;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -172,6 +177,18 @@ class Utilisateur implements UserInterface
     public function setActivateToken(?string $activate_token): self
     {
         $this->activate_token = $activate_token;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

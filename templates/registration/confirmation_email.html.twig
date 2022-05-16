@@ -1,0 +1,13 @@
+<div class="jumbotron text-center py-3">
+    <h1>Courrier de validation</h1>
+</div>
+
+<p>
+    Bonjour, veuillez confirmez votre inscription en cliquant sur le lien ci-dessous <br><br>
+    <a href="{{ signedUrl }}">Confirmer votre email</a>.
+    Ce lien expirera dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+</p>
+
+<p>
+    Salutations!
+</p>
