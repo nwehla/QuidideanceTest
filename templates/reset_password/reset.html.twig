@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Reinitialisation du mot de passe{% endblock %}
 
 {% block content %}
 <div class='login_register_wrap section'>
@@ -18,10 +18,13 @@
                                     <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
                                 {% endfor %}
                             </div>
-                            {{ form_start(resetForm) }}
+                            <div class="py-5 bg-dark  mg-3 border border-dark text-center text-light">
+                                {{ form_start(resetForm) }}
                                 {{ form_row(resetForm.plainPassword) }}
-                                    <button class="btn btn-fill-out btn-block">Réinitialisé mot de passe</button>
+                                    <button class="btn btn-fill-out btn-block">Réinitialiser votre mot de passe</button>
                             {{ form_end(resetForm) }}
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

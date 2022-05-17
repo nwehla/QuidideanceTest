@@ -17,14 +17,6 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email' , EmailType::class , [
-                'disabled' => true ,
-                'label' => 'Mon adresse mail'
-            ])
-            ->add('username' , TextType::class , [
-                'disabled' => true ,
-                'label' => 'Mon prénom'                
-            ])            
             ->add('old_password' , PasswordType::class , [
                 'label' => 'Mon mot de passe actuel' ,
                 'mapped' => false ,
