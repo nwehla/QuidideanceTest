@@ -31,7 +31,10 @@ class RegistrationController extends AbstractController
       */
     public function register(Request $request, UserPasswordHasherInterface $encoder, EntityManagerInterface $entityManager): Response
     {
-        $user = new Utilisateur();
+
+        if ($this->isGranted('ROLE_SUPERADMIN') ) {
+            $user = new Utilisateur();
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -62,6 +65,10 @@ class RegistrationController extends AbstractController
             'utilisateur' => $user,
             'form' => $form->createView(),
         ]);
+    }
+      else{
+         return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+       }
     }
 
     /**

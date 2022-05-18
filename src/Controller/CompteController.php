@@ -12,6 +12,7 @@ use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -34,12 +35,17 @@ class CompteController extends AbstractController
      */
     public function index(): Response
     {
+        
         $utilisateur = $this->getUser();
 
-
-        return $this->render('compte/compte_index.html.twig', [
-            'utilisateur' => $utilisateur,
-        ]);
+        if($this->isGranted($utilisateur)){
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+        }
+        else{
+            return $this->render('compte/compte_index.html.twig', [
+                'utilisateur' => $utilisateur,
+            ]);
+        }        
     }
     /**
      * @Route("/modifier-mon-mot-de-passe", name="compte_password")
@@ -83,119 +89,14 @@ class CompteController extends AbstractController
         ]);
     }
 
-    //     /**
-    //     * @Route("/montre", name="utilisateur_montre", methods={"GET"})
-    //    */
-    //   public function show(): Response
-    //   {
-    //     $utilisateur = $this->getUser();
-
-    //         return $this->render("compte/mes_informations.html.twig", [
-
-    //        'utilisateur'=>$utilisateur,
-    //     //    dd($utilisateur),
-    //         ]);  
-    //     }      
-
-    // /**
-    //  * @Route("/modifier-mon-compte", name="compte_edit", methods={"GET", "POST"})
-    //  */
-    // public function modifiermesinfos(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $manager): Response
-    // {
-    //     // if ($this->isGranted($this->getUser())) {
-    //     // $form = $this->createForm(UtilisateurModifierType::class, $utilisateur);
-    //     // $form->handleRequest($request);
-
-    //     // if ($form->isSubmitted() && $form->isValid()) {
-    //     //     //initialisation de la date de creation 
-    //     //     $utilisateur->setDatemiseajour(new DateTime());
-
-    //     //     //Persist
-    //     //     $manager->persist($utilisateur);
-
-    //     //     //Flush
-    //     //     $manager->flush();
-    //     //     $utilisateurRepository->add($utilisateur);
-    //     //     $this->addFlash("success","La modification a été effectuée");
-    //     //     return $this->redirectToRoute('compte_index', [], Response::HTTP_SEE_OTHER);
-    //     // }
-
-    //     // return $this->render('compte/compte_edit.html.twig', [
-    //     //     'utilisateur' => $utilisateur,
-    //     //     'form' => $form->createView(),
-    //     // ]);
-    //     // }
-    //     // else{
-    //     //     return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
-    //     // }
-
-    //     // //TEST
-    //     $utilisateur = $this->getUser();
-    //     dd($utilisateur);
-    //     //Appel du formulaire
-    //     $form = $this->createForm(UtilisateurModifierType::class , $utilisateur);
-
-    //     //Traitement du formulaire
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //             //initialisation de la date de creation 
-
-    //         //Persist
-    //         $manager->persist($utilisateur);
-
-    //         //Flush
-    //         $manager->flush();              
-    //         }
-
-    //     return $this->render('compte/compte_edit.html.twig' , [
-    //         'utilisateur'=> $utilisateur,
-    //         'id' =>$utilisateur-> $this->getId(),
-    //         // 'id' => $utilisateur->getId(),
-    //         'form' => $form->createView(),
-    //     ]);    
-    // }
-
-
-    // /**
-    //  *@Route("/{id}/modifier-mon-compte", name="compte_edit", methods={"GET", "POST"})
-    //  */
-
-    // public function modifier(Request $request, Utilisateur $utilisateur, EntityManagerInterface $manager,UtilisateurRepository $repo)
-    // {
-    //     // Creation de mon Formulaire
-    //     $form = $this->createForm(UtilisateurModifierType::class,$utilisateur);        
-
-    //     // Analyse des Requetes & Traitement des information 
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-
-
-    //          $manager->flush();
-
-    //          return $this->redirectToRoute(
-    //              'utilisateur_montre',
-    //              ['id' => $utilisateur->getId()]
-    //          ); // Redirection vers la page
-    //     }     
-    //     // Redirection du Formulaire vers le TWIG pour l’affichage avec
-    //     return $this->render('utilisateur/edit.html.twig', [
-    //         "utilisateur" => $utilisateur,
-    //         var_dump($utilisateur),
-    //         'form' =>$form->createView(),
-
-    //         'id'=>$utilisateur->getId(),
-    //     ]);
-    // }
-
     /**
      * @Route("/{id}/modifierCompte", name="compte_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $manager,AuthenticationUtils $authenticationUtils): Response
     {
-        $notification = null;
-        $user = $this->getUser();
+                
+            $notification = null;
+            $user = $this->getUser();
 
             $form = $this->createForm(CompteModifierType::class, $utilisateur);
             $form->handleRequest($request);
@@ -223,8 +124,6 @@ class CompteController extends AbstractController
             return $this->render('compte/formModifierCompte.html.twig', [
                 'utilisateur' => $utilisateur,
                 'formModifierCompte' => $form->createView(),
-            ]);
-       
-        
+            ]);               
     }
 }
