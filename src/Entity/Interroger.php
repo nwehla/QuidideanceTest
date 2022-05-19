@@ -22,6 +22,11 @@ class Interroger
      */
     private $intitule;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Sondage::class, inversedBy="interroger")
+     */
+    private $sondage;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Interroger
     public function setIntitule(?string $intitule): self
     {
         $this->intitule = $intitule;
+
+        return $this;
+    }
+
+    public function getSondage(): ?Sondage
+    {
+        return $this->sondage;
+    }
+
+    public function setSondage(?Sondage $sondage): self
+    {
+        $this->sondage = $sondage;
 
         return $this;
     }

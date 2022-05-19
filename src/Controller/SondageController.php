@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Sondage;
 use App\Form\SondageType;
+use App\Entity\Interroger;
 use App\Repository\SondageRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin/sondage")
@@ -28,13 +30,19 @@ class SondageController extends AbstractController
     /**
      * @Route("/new", name="app_sondage_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, SondageRepository $sondageRepository): Response
+    public function new(Request $request, SondageRepository $sondageRepository, EntityManagerInterface $manager): Response
     {
-        $sondage = new Sondage();
+        $interroger = new Interroger();
+        $sondage = new Sondage();        
         $form = $this->createForm(SondageType::class, $sondage);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Persist
+            $manager->persist($sondage);
+             
+            //Flush
+            $manager->flush();
             $sondageRepository->add($sondage);
             $this->addFlash("success","La création a été effectuée");
             return $this->redirectToRoute('app_sondage_index', [], Response::HTTP_SEE_OTHER);
@@ -42,6 +50,8 @@ class SondageController extends AbstractController
 
         return $this->render('sondage/new.html.twig', [
             'sondage' => $sondage,
+            'statut' => $sondage->getStatut(),
+
             'form' => $form->createView(),
         ]);
     }

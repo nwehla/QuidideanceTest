@@ -52,6 +52,11 @@ class Reponse
      */
     private $datefermeture;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Sondage::class, inversedBy="reponse")
+     */
+    private $sondage;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +142,18 @@ class Reponse
     public function setDatefermeture(?\DateTimeInterface $datefermeture): self
     {
         $this->datefermeture = $datefermeture;
+
+        return $this;
+    }
+
+    public function getSondage(): ?Sondage
+    {
+        return $this->sondage;
+    }
+
+    public function setSondage(?Sondage $sondage): self
+    {
+        $this->sondage = $sondage;
 
         return $this;
     }

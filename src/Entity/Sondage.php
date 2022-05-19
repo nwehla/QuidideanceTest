@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SondageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,22 @@ class Sondage
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $datedefermeture;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Interroger::class, mappedBy="sondage")
+     */
+    private $interroger;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reponse::class, mappedBy="sondage")
+     */
+    private $reponse;
+
+    public function __construct()
+    {
+        $this->interroger = new ArrayCollection();
+        $this->reponse = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +189,66 @@ class Sondage
     public function setDatedefermeture(?\DateTimeInterface $datedefermeture): self
     {
         $this->datedefermeture = $datedefermeture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Interroger>
+     */
+    public function getInterroger(): Collection
+    {
+        return $this->interroger;
+    }
+
+    public function addInterroger(Interroger $interroger): self
+    {
+        if (!$this->interroger->contains($interroger)) {
+            $this->interroger[] = $interroger;
+            $interroger->setSondage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInterroger(Interroger $interroger): self
+    {
+        if ($this->interroger->removeElement($interroger)) {
+            // set the owning side to null (unless already changed)
+            if ($interroger->getSondage() === $this) {
+                $interroger->setSondage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponse(): Collection
+    {
+        return $this->reponse;
+    }
+
+    public function addReponse(Reponse $reponse): self
+    {
+        if (!$this->reponse->contains($reponse)) {
+            $this->reponse[] = $reponse;
+            $reponse->setSondage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): self
+    {
+        if ($this->reponse->removeElement($reponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reponse->getSondage() === $this) {
+                $reponse->setSondage(null);
+            }
+        }
 
         return $this;
     }

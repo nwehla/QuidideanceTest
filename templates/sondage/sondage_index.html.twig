@@ -42,10 +42,11 @@
                 <td>{{ sondage.question }}</td>
                 <td>{{ sondage.description }}</td>
                 <td>{{ sondage.multiple ? 'Yes' : 'No' }}</td>
+                
                 <td>{{ sondage.statut }}</td>
                 <td>{{ sondage.messagefermeture }}</td>
                 <td>{{ sondage.datecreation ? sondage.datecreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ sondage.datemisajour ? sondage.datemisajour|date('Y-m-d H:i:s') : '' }}</td>
+                {# <td>{{ sondage.datemisajour ? sondage.datemisajour|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>{{ sondage.datedefermeture ? sondage.datedefermeture|date('Y-m-d H:i:s') : '' }}</td>
                 
                 <td>
