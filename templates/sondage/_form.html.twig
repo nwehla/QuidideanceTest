@@ -1,14 +1,26 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+    <fieldset>
+        
+        <ol id="idOlProposition" class="propositions" data-prototype="{{ 
+       form_widget(form.interroger.vars.prototype)|e('html_attr') }}">
+        {# iterate over each existing proposition and render its only field: wording #}
+        {% for interroge in form.interroger %}
+        <li>
+        {{ form_row(interroge.intitule) }}
+        </li>
+        {% endfor %}
+        </ol>
+        <div id="add_button"></div>
+        </fieldset>
+
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
 <script>
-    function proposition() {
-85
-let proposition = new 
-FormCollectionTypeClass("idOlProposition","add_button","Retirer cette proposition de réponse","Ajouter une proposition de réponse","<h4>","Composant","</h4>");
+    function interroger() {
+let interroge= new FormCollectionTypeClass("idOlProposition","add_button","Retirer cette proposition de réponse","Ajouter une proposition de réponse","<h4>","Composant","</h4>");
 }
-proposition();
+interroger();
 
 
 </script>

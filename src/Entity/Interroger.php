@@ -23,10 +23,12 @@ class Interroger
     private $intitule;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Sondage::class, inversedBy="interroger")
+     * @ORM\ManyToOne(targetEntity=Sondage::class, inversedBy="cls")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $sondage;
 
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -55,4 +57,6 @@ class Interroger
 
         return $this;
     }
-}
+
+   
+   }

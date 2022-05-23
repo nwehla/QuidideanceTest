@@ -33,7 +33,8 @@ class SondageController extends AbstractController
     public function new(Request $request, SondageRepository $sondageRepository, EntityManagerInterface $manager): Response
     {
         $interroger = new Interroger();
-        $sondage = new Sondage();        
+        $sondage = new Sondage();  
+        $sondage->getInterroger()->add($interroger);      
         $form = $this->createForm(SondageType::class, $sondage);
         $form->handleRequest($request);
 

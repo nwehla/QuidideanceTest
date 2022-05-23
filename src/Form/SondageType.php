@@ -47,19 +47,19 @@ class SondageType extends AbstractType
                 ],
                 ])
 
-            ->add('interroger', EntityType::class, [
-                // Label du champ    
-                'label'  => 'Question',
-                'placeholder' => 'Sélectionner',
-                // looks for choices from this entity
-                'class' => Interroger::class,
-                // Sur quelle propriete je fais le choix
-                'choice_label' => 'intitule',
-                // used to render a select box, check boxes or radios
-                 'multiple' => true,
-                'expanded' => false,
-                'required' => true,
-            ])
+            // ->add('interroger', EntityType::class, [
+            //     // Label du champ    
+            //     'label'  => 'Question',
+            //     'placeholder' => 'Sélectionner',
+            //     // looks for choices from this entity
+            //     'class' => Interroger::class,
+            //     // Sur quelle propriete je fais le choix
+            //     'choice_label' => 'intitule',
+            //     // used to render a select box, check boxes or radios
+            //      'multiple' => true,
+            //     'expanded' => false,
+            //     'required' => true,
+            // ])
 
             // ->add('reponse', EntityType::class, [
             //     // Label du champ    
@@ -113,13 +113,13 @@ class SondageType extends AbstractType
                 
             // ]);
         //     ;
-        // $builder->add('question', CollectionType::class, [
-        //     'entry_type' => InterrogerType::class,
-        //     'entry_options' => ['label' => false],
-        //     'allow_add' => true,
-        //     'allow_delete' => true,
-        //     'by_reference' => false,
-        //     ]);
+        $builder->add('interroger', CollectionType::class, [
+            'entry_type' => InterrogerType::class,
+            'entry_options' => ['label' => false],
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            ]);
             
     }
 

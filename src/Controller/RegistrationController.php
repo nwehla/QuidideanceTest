@@ -16,14 +16,21 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class RegistrationController extends AbstractController
 {
     private $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(EmailVerifier $emailVerifier, SluggerInterface $slugger)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->slugger = $slugger;
+    }
+
+    private function getSlugger(Utilisateur $user) : string{
+        $slug = mb_strtolower($user->getUsername() . '-' . time(), 'UTF8');
+        return $this->slugger->slug($slug);                        
     }
 
      /**
@@ -42,7 +49,8 @@ class RegistrationController extends AbstractController
              //Encodage du mot de passe
              $password = $encoder->hashPassword($user , $user->getPassword());
             
-             $user->setPassword($password);
+            $user->setPassword($password)
+                ->setSlug($this->getSlugger($user));
            
             $entityManager->persist($user);
             $entityManager->flush();

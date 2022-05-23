@@ -64,20 +64,28 @@ class Sondage
      */
     private $datedefermeture;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Interroger::class, mappedBy="sondage")
-     */
-    private $interroger;
+    
 
     /**
      * @ORM\OneToMany(targetEntity=Reponse::class, mappedBy="sondage")
      */
     private $reponse;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Interroger::class, mappedBy="sondage")
+     */
+    private $interroger;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Interroger::class, mappedBy="sondage", orphanRemoval=true)
+     */
+    private $cls;
+
     public function __construct()
     {
         $this->interroger = new ArrayCollection();
         $this->reponse = new ArrayCollection();
+        $this->cls = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,6 +201,37 @@ class Sondage
         return $this;
     }
 
+
+    /**
+     * @return Collection<int, Reponse>
+     */
+    public function getReponse(): Collection
+    {
+        return $this->reponse;
+    }
+
+    public function addReponse(Reponse $reponse): self
+    {
+        if (!$this->reponse->contains($reponse)) {
+            $this->reponse[] = $reponse;
+            $reponse->setSondage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReponse(Reponse $reponse): self
+    {
+        if ($this->reponse->removeElement($reponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reponse->getSondage() === $this) {
+                $reponse->setSondage(null);
+            }
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Interroger>
      */
@@ -224,29 +263,29 @@ class Sondage
     }
 
     /**
-     * @return Collection<int, Reponse>
+     * @return Collection<int, Interroger>
      */
-    public function getReponse(): Collection
+    public function getCls(): Collection
     {
-        return $this->reponse;
+        return $this->cls;
     }
 
-    public function addReponse(Reponse $reponse): self
+    public function addCl(Interroger $cl): self
     {
-        if (!$this->reponse->contains($reponse)) {
-            $this->reponse[] = $reponse;
-            $reponse->setSondage($this);
+        if (!$this->cls->contains($cl)) {
+            $this->cls[] = $cl;
+            $cl->setSondage($this);
         }
 
         return $this;
     }
 
-    public function removeReponse(Reponse $reponse): self
+    public function removeCl(Interroger $cl): self
     {
-        if ($this->reponse->removeElement($reponse)) {
+        if ($this->cls->removeElement($cl)) {
             // set the owning side to null (unless already changed)
-            if ($reponse->getSondage() === $this) {
-                $reponse->setSondage(null);
+            if ($cl->getSondage() === $this) {
+                $cl->setSondage(null);
             }
         }
 

@@ -26,6 +26,7 @@
                 <th>Prenom</th>
                 <th>Email</th>
                 <th>Password</th>
+                <th>Slug</th>
                 <th>Roles</th>
                 {# <th>Slug</th> #}
                 <th>Date de création</th>
@@ -41,15 +42,15 @@
                 <td>{{ utilisateur.username }}</td>
                 <td>{{ utilisateur.email }}</td>
                 <td>{{ utilisateur.password }}</td>
+                <td>{{ utilisateur.slug|default('default_slug') }}</td>
                 <td>{{ utilisateur.roles ? utilisateur.roles|json_encode : '' }}</td>
-                {# <td>{{ utilisateur.slug }}</td> #}
                 <td>{{ utilisateur.datecreation ? utilisateur.datecreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ utilisateur.datemiseajour ? utilisateur.datemiseajour|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}" class="btn btn-dark mt-3">Voir</a>
+                    <a href="{{ path('app_utilisateur_show', {'slug': utilisateur.slug|default('default_slug') }) }}" class="btn btn-dark mt-3">Voir</a>
                 </td>
                 <td>
-                    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+                    <a href="{{ path('app_utilisateur_edit', {'slug': utilisateur.slug|default('default_slug')}) }}" class="btn btn-warning mt-3">Modifier</a>
                 </td>
                 <td>
                     {{ include('utilisateur/_delete_form.html.twig') }}

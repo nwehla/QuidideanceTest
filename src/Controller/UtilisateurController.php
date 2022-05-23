@@ -18,12 +18,14 @@ use Symfony\Component\Security\Guard\AuthenticatorInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 /**
  * @Route("/admin/utilisateur")
  */
 class UtilisateurController extends AbstractController
-{
+{   
     public function uniqidReal($lenght = 13) {
         // uniqid donne 13 caratères, mais pouvez ajuster si vous voulez.
         if (function_exists("random_bytes")) {
@@ -35,6 +37,7 @@ class UtilisateurController extends AbstractController
         }
         return substr(bin2hex($bytes), 0, $lenght);
     }
+    
     
     /**
      * @Route("/", name="app_utilisateur_index", methods={"GET"})
@@ -80,97 +83,15 @@ class UtilisateurController extends AbstractController
 
 //     }
 
-
-    // /**
-    //  * @Route("/new", name="app_utilisateur_new", methods={"GET", "POST"})
-    //  */
-    // public function new(Request $request, UtilisateurRepository $utilisateurRepository, UserPasswordHasherInterface $encoder,EntityManagerInterface $manager,
-    // MailerInterface $mailer): Response
-    // {
-    //      if ($this->isGranted('ROLE_SUPERADMIN')) {
-    //     $utilisateur = new Utilisateur();
-    //     $form = $this->createForm(UtilisateurType::class, $utilisateur);
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $utilisateur = $form->getData();
-         
-    //         //Encodage du mot de passe
-    //         $password = $encoder->hashPassword($utilisateur , $utilisateur->getPassword());
-            
-    //         $utilisateur->setPassword($password);
-    //         //initialisation de la date de creation 
-    //         $utilisateur->setDatecreation(new DateTime());
-    //         //initialisation du token et cryptage de celui-ci
-    //         $utilisateur->setActivateToken(md5($this->uniqidReal()));
-    //         // dd($utilisateur);
-            
-    //         //Persist
-    //         $manager->persist($utilisateur);
-            
-    //         //Flush
-    //         $manager->flush(); 
-    //         //on créé le message d'activation de compte
-    //         // $message = (new Email('Activation de votre compte'))
-    //         //     ->setFrom('angelus31101981@hotmail.com')
-    //         // //on attribue le destinataire
-    //         //         ->setTo($utilisateur->getEmail())
-    //         // //on créé le contenu
-    //         //     ->setBody(
-    //         //         $this->renderView('email/activation.html.twig' ,['token' => $utilisateur->getActivateToken()]
-    //         //     ),
-    //         //     'text/html'
-    //         //     )
-    //         //     ;
-    //         //     //on envoie l'email
-    //         //     $mailer->send($message);
-    //             // return $guardHandler->authenticateUserAndHandleSuccess(
-    //             //     $utilisateur,
-    //             //     $request,
-    //             //     $authenticator,
-    //             //     'main' //firewall nom dans security.yaml
-    //             // );
-    //         $message = (new Email())
-    //             ->From('angelus31101981@hotmail.com')
-    //         //on attribue le destinataire
-    //             ->To($utilisateur->getEmail())
-    //         //->cc('cc@example.com')
-    //         //->bcc('bcc@example.com')
-    //         //->replyTo('fabien@example.com')
-    //         //->priority(Email::PRIORITY_HIGH)
-    //         //on créé le contenu
-    //             ->subject('Confirmation')
-    //             ->text('MONQ')
-    //             ->html($this->renderView('email/activation.html.twig' ,['token' => $utilisateur->getActivateToken()])
-    //             )
-    //             ;
-    //             //on envoie l'email
-    //             $mailer->send($message);
-                
-
-    //         $utilisateurRepository->add($utilisateur);
-    //         $this->addFlash("success","La création a été effectuée");
-    //         return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
-    //     }
-
-    //     return $this->render('utilisateur/new.html.twig', [
-    //         'utilisateur' => $utilisateur,
-    //         'form' => $form->createView(),
-    //     ]);
-    //      }
-    //      else{
-    //         return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
-    //     }
-    // }
-
     /**
-     * @Route("/{id}", name="app_utilisateur_show", methods={"GET"})
+     * @Route("/{slug}", name="app_utilisateur_show", methods={"GET"})
      */
     public function show(Utilisateur $utilisateur): Response
     {
         if ($this->isGranted('ROLE_SUPERADMIN')) {
         return $this->render('utilisateur/show.html.twig', [
             'utilisateur' => $utilisateur,
+            'slug' => $utilisateur->getSlug(),
         ]);
         }
         else{
@@ -179,7 +100,7 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_utilisateur_edit", methods={"GET", "POST"})
+     * @Route("/{slug}/modifier", name="app_utilisateur_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, EntityManagerInterface $manager): Response
     {
@@ -204,6 +125,7 @@ class UtilisateurController extends AbstractController
         return $this->render('utilisateur/edit.html.twig', [
             'utilisateur' => $utilisateur,
             'form' => $form->createView(),
+            'slug' => $utilisateur->getSlug(),
         ]);
         }
         else{
