@@ -34,10 +34,10 @@
             <tr>
                 <td>{{ interroger.intitule }}</td>
                 <td>
-                    <a href="{{ path('app_interroger_show', {'id': interroger.id}) }}" class="btn btn-dark mt-3">Voir</a>
+                    <a href="{{ path('app_interroger_show', {'slug': interroger.slug}) }}" class="btn btn-dark mt-3">Voir</a>
                 </td>
                 <td>
-                    <a href="{{ path('app_interroger_edit', {'id': interroger.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+                    <a href="{{ path('app_interroger_edit', {'slug': interroger.slug}) }}" class="btn btn-warning mt-3">Modifier</a>
                 </td>
                 <td>
                     {{ include('interroger/_delete_form.html.twig') }}

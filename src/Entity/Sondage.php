@@ -70,22 +70,15 @@ class Sondage
      * @ORM\OneToMany(targetEntity=Reponse::class, mappedBy="sondage")
      */
     private $reponse;
-
+    
     /**
-     * @ORM\OneToMany(targetEntity=Interroger::class, mappedBy="sondage")
+     * @ORM\Column(type="string", length=255)
      */
-    private $interroger;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Interroger::class, mappedBy="sondage", orphanRemoval=true)
-     */
-    private $cls;
+    private $slug;
 
     public function __construct()
     {
-        $this->interroger = new ArrayCollection();
         $this->reponse = new ArrayCollection();
-        $this->cls = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,64 +223,16 @@ class Sondage
         }
 
         return $this;
+    }    
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
 
-    /**
-     * @return Collection<int, Interroger>
-     */
-    public function getInterroger(): Collection
+    public function setSlug(string $slug): self
     {
-        return $this->interroger;
-    }
-
-    public function addInterroger(Interroger $interroger): self
-    {
-        if (!$this->interroger->contains($interroger)) {
-            $this->interroger[] = $interroger;
-            $interroger->setSondage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInterroger(Interroger $interroger): self
-    {
-        if ($this->interroger->removeElement($interroger)) {
-            // set the owning side to null (unless already changed)
-            if ($interroger->getSondage() === $this) {
-                $interroger->setSondage(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Interroger>
-     */
-    public function getCls(): Collection
-    {
-        return $this->cls;
-    }
-
-    public function addCl(Interroger $cl): self
-    {
-        if (!$this->cls->contains($cl)) {
-            $this->cls[] = $cl;
-            $cl->setSondage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCl(Interroger $cl): self
-    {
-        if ($this->cls->removeElement($cl)) {
-            // set the owning side to null (unless already changed)
-            if ($cl->getSondage() === $this) {
-                $cl->setSondage(null);
-            }
-        }
+        $this->slug = $slug;
 
         return $this;
     }

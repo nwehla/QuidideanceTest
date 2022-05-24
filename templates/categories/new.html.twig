@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle categorie{% endblock %}
+
+{% block content %}
+<div class="py-3">
+    <a href="{{ path('app_categories_index') }}" class="btn btn-primary mt-3">Retour au tableau admin</a>
+
+</div>
+    <div class="jumbotron text-center py-3">
+        <h1>Ajout d'une nouvelle catégorie</h1>
+    </div>
+    <div class="py-3">
+        {{ include('categories/_form.html.twig') }}
+
+    </div>
+
+{% endblock %}

@@ -25,7 +25,16 @@ use Symfony\Component\String\Slugger\SluggerInterface;
  * @Route("/admin/utilisateur")
  */
 class UtilisateurController extends AbstractController
-{   
+{
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
+    private function getSlugger(Utilisateur $utilisateur) : string{
+        $slug = mb_strtolower($utilisateur->getUsername() . '-' . time(), 'UTF8');
+        return $this->slugger->slug($slug);                        
+    }   
     public function uniqidReal($lenght = 13) {
         // uniqid donne 13 caratères, mais pouvez ajuster si vous voulez.
         if (function_exists("random_bytes")) {
@@ -109,8 +118,9 @@ class UtilisateurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $utilisateur->setSlug($this->getSlugger($utilisateur))
             //initialisation de la date de creation 
-            $utilisateur->setDatemiseajour(new DateTime());
+                        ->setDatemiseajour(new DateTime());
             
             //Persist
             $manager->persist($utilisateur);

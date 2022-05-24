@@ -113,13 +113,13 @@ class SondageType extends AbstractType
                 
             // ]);
         //     ;
-        $builder->add('interroger', CollectionType::class, [
-            'entry_type' => InterrogerType::class,
-            'entry_options' => ['label' => false],
-            'allow_add' => true,
-            'allow_delete' => true,
-            'by_reference' => false,
-            ]);
+        // $builder->add('interroger', CollectionType::class, [
+        //     'entry_type' => InterrogerType::class,
+        //     'entry_options' => ['label' => false],
+        //     'allow_add' => true,
+        //     'allow_delete' => true,
+        //     'by_reference' => false,
+        //     ]);
             
     }
 

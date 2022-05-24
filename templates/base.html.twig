@@ -44,6 +44,7 @@
                   {% if is_granted('ROLE_SUPERADMIN') %}  
                     <a class="dropdown-item" href="{{path('app_utilisateur_index')}}">Admin</a>
                   {% endif %}
+                    <a class="dropdown-item" href="{{path('app_categories_index')}}">Catégorie</a>
                     <a class="dropdown-item" href="{{path('app_sondage_index')}}">Sondage</a>
                     <a class="dropdown-item" href="{{path('app_interroger_index')}}">Interroger</a>
                     <a class="dropdown-item" href="{{path('app_reponse_index')}}">Réponse</a>

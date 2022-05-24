@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTimeImmutable;
 use App\Entity\Sondage;
 use App\Form\SondageType;
 use App\Entity\Interroger;
@@ -10,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -17,6 +19,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class SondageController extends AbstractController
 {
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
+    private function getSlugger(Sondage $sondage) : string{
+        $slug = mb_strtolower($sondage->getTitre() . '-' . time(), 'UTF8');
+        return $this->slugger->slug($slug);                        
+    }
+    
     /**
      * @Route("/", name="app_sondage_index", methods={"GET"})
      */
@@ -34,11 +46,14 @@ class SondageController extends AbstractController
     {
         $interroger = new Interroger();
         $sondage = new Sondage();  
-        $sondage->getInterroger()->add($interroger);      
+        // $sondage->getInterroger()->add($interroger);      
         $form = $this->createForm(SondageType::class, $sondage);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $sondage->setSlug($this->getSlugger($sondage))
+                ->setDatecreation(new \DateTimeImmutable('now'));
+
             //Persist
             $manager->persist($sondage);
              
@@ -58,17 +73,18 @@ class SondageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_sondage_show", methods={"GET"})
+     * @Route("/{slug}", name="app_sondage_show", methods={"GET"})
      */
     public function show(Sondage $sondage): Response
     {
         return $this->render('sondage/show.html.twig', [
             'sondage' => $sondage,
+            'slug' => $sondage->getSlug(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="app_sondage_edit", methods={"GET", "POST"})
+     * @Route("/{slug}/modifier", name="app_sondage_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Sondage $sondage, SondageRepository $sondageRepository): Response
     {
@@ -76,6 +92,8 @@ class SondageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $sondage->setSlug($this->getSlugger($sondage))
+                    ->setDatemiseajour(new \DateTimeImmutable('now'));
             $sondageRepository->add($sondage);
             $this->addFlash("success","La modification a été effectuée");
             return $this->redirectToRoute('app_sondage_index', [], Response::HTTP_SEE_OTHER);
@@ -84,6 +102,7 @@ class SondageController extends AbstractController
         return $this->render('sondage/edit.html.twig', [
             'sondage' => $sondage,
             'form' => $form->createView(),
+            'slug' => $sondage->getSlug(),
         ]);
     }
 

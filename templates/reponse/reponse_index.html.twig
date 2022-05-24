@@ -44,10 +44,10 @@
                 <td>{{ reponse.datemiseajour ? reponse.datemiseajour|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ reponse.datefermeture ? reponse.datefermeture|date('Y-m-d H:i:s') : '' }}</td>                
                 <td>
-                    <a href="{{ path('app_reponse_show', {'id': reponse.id}) }}" class="btn btn-dark mt-3">Voir</a>
+                    <a href="{{ path('app_reponse_show', {'slug': reponse.slug}) }}" class="btn btn-dark mt-3">Voir</a>
                 </td>
                 <td>
-                    <a href="{{ path('app_reponse_edit', {'id': reponse.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+                    <a href="{{ path('app_reponse_edit', {'slug': reponse.slug}) }}" class="btn btn-warning mt-3">Modifier</a>
                 </td>
                 <td>
                     {{ include('reponse/_delete_form.html.twig') }}

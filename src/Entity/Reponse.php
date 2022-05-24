@@ -57,6 +57,11 @@ class Reponse
      */
     private $sondage;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,6 +159,18 @@ class Reponse
     public function setSondage(?Sondage $sondage): self
     {
         $this->sondage = $sondage;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -46,14 +46,14 @@
                 <td>{{ sondage.statut }}</td>
                 <td>{{ sondage.messagefermeture }}</td>
                 <td>{{ sondage.datecreation ? sondage.datecreation|date('Y-m-d H:i:s') : '' }}</td>
-                {# <td>{{ sondage.datemisajour ? sondage.datemisajour|date('Y-m-d H:i:s') : '' }}</td> #}
+                <td>{{ sondage.datemiseajour ? sondage.datemiseajour|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sondage.datedefermeture ? sondage.datedefermeture|date('Y-m-d H:i:s') : '' }}</td>
                 
                 <td>
-                    <a href="{{ path('app_sondage_show', {'id': sondage.id}) }}" class="btn btn-dark mt-3">Voir</a>
+                    <a href="{{ path('app_sondage_show', {'slug': sondage.slug}) }}" class="btn btn-dark mt-3">Voir</a>
                 </td>
                 <td>
-                    <a href="{{ path('app_sondage_edit', {'id': sondage.id}) }}" class="btn btn-warning mt-3">Modifier</a>
+                    <a href="{{ path('app_sondage_edit', {'slug': sondage.slug}) }}" class="btn btn-warning mt-3">Modifier</a>
                 </td>
                 <td>
                     {{ include('sondage/_delete_form.html.twig') }}

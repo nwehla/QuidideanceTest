@@ -1,18 +1,19 @@
 {{ form_start(form) }}
-
+{# 
     <fieldset>
         
         <ol id="idOlProposition" class="propositions" data-prototype="{{ 
-       form_widget(form.interroger.vars.prototype)|e('html_attr') }}">
+       form_widget(--!form.--interroger.--vars.prototype!--)|e('html_attr') }}"> 
         {# iterate over each existing proposition and render its only field: wording #}
-        {% for interroge in form.interroger %}
+        {# {% for interroge in form.interroger %}
         <li>
         {{ form_row(interroge.intitule) }}
         </li>
         {% endfor %}
         </ol>
         <div id="add_button"></div>
-        </fieldset>
+        </fieldset> #} 
+        {{ form_widget(form)}}
 
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

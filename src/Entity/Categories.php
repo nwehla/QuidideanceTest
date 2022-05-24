@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\InterrogerRepository;
+use App\Repository\CategoriesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=InterrogerRepository::class)
+ * @ORM\Entity(repositoryClass=CategoriesRepository::class)
  */
-class Interroger
+class Categories
 {
     /**
      * @ORM\Id
@@ -18,29 +18,28 @@ class Interroger
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $intitule;
+    private $titre;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
 
-    
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIntitule(): ?string
+    public function getTitre(): ?string
     {
-        return $this->intitule;
+        return $this->titre;
     }
 
-    public function setIntitule(?string $intitule): self
+    public function setTitre(string $titre): self
     {
-        $this->intitule = $intitule;
+        $this->titre = $titre;
 
         return $this;
     }
@@ -56,6 +55,4 @@ class Interroger
 
         return $this;
     }
-
-   
-   }
+}

@@ -9,12 +9,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @Route("/admin/interroger")
  */
 class InterrogerController extends AbstractController
 {
+    public function __construct(SluggerInterface $slugger)
+    {
+        $this->slugger = $slugger;
+    }
+
+    private function getSlugger(Interroger $interroger) : string{
+        $slug = mb_strtolower($interroger->getIntitule() . '-' . time(), 'UTF8');
+        return $this->slugger->slug($slug);                        
+    }
+
     /**
      * @Route("/", name="app_interroger_index", methods={"GET"})
      */
@@ -35,6 +46,7 @@ class InterrogerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $interroger->setSlug($this->getSlugger($interroger));
             $interrogerRepository->add($interroger);
             $this->addFlash("success","La création a été effectuée");
             return $this->redirectToRoute('app_interroger_index', [], Response::HTTP_SEE_OTHER);
@@ -47,17 +59,18 @@ class InterrogerController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_interroger_show", methods={"GET"})
+     * @Route("/{slug}", name="app_interroger_show", methods={"GET"})
      */
     public function show(Interroger $interroger): Response
     {
         return $this->render('interroger/show.html.twig', [
             'interroger' => $interroger,
+            'slug' => $interroger->getSlug(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="app_interroger_edit", methods={"GET", "POST"})
+     * @Route("/{slug}/modifier", name="app_interroger_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Interroger $interroger, InterrogerRepository $interrogerRepository): Response
     {
@@ -73,6 +86,7 @@ class InterrogerController extends AbstractController
         return $this->render('interroger/edit.html.twig', [
             'interroger' => $interroger,
             'form' => $form->createView(),
+            'slug' => $interroger->getSlug(),
         ]);
     }
 
