@@ -2,6 +2,9 @@ body{
     position: relative;
 }
 
+td.toto{
+    vertical-align: middle;
+}
 
 .item-navbar-custom a{
 color: #000;

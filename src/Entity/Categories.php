@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoriesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Categories
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Interroger::class, mappedBy="categorie")
+     */
+    private $interrogers;
+
+    public function __construct()
+    {
+        $this->interrogers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -55,4 +67,37 @@ class Categories
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Interroger>
+     */
+    public function getInterrogers(): Collection
+    {
+        return $this->interrogers;
+    }
+
+    public function addInterroger(Interroger $interroger): self
+    {
+        if (!$this->interrogers->contains($interroger)) {
+            $this->interrogers[] = $interroger;
+            $interroger->addCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInterroger(Interroger $interroger): self
+    {
+        if ($this->interrogers->removeElement($interroger)) {
+            $interroger->removeCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->titre;
+    }
+
 }

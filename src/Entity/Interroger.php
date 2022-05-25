@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InterrogerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Interroger
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Categories::class, inversedBy="interrogers")
+     */
+    private $categorie;
+
+    public function __construct()
+    {
+        $this->categorie = new ArrayCollection();
+    }
 
     
     public function getId(): ?int
@@ -56,6 +68,31 @@ class Interroger
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Categories>
+     */
+    public function getCategorie(): Collection
+    {
+        return $this->categorie;
+    }
+
+    public function addCategorie(Categories $categorie): self
+    {
+        if (!$this->categorie->contains($categorie)) {
+            $this->categorie[] = $categorie;
+        }
+
+        return $this;
+    }
+
+    public function removeCategorie(Categories $categorie): self
+    {
+        $this->categorie->removeElement($categorie);
+
+        return $this;
+    }
+    
 
    
    }

@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Categories;
 use App\Entity\Interroger;
 use App\Form\InterrogerType;
 use App\Repository\InterrogerRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +42,7 @@ class InterrogerController extends AbstractController
     /**
      * @Route("/new", name="app_interroger_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, InterrogerRepository $interrogerRepository): Response
+    public function new(Request $request, InterrogerRepository $interrogerRepository,EntityManagerInterface $manager): Response
     {
         $interroger = new Interroger();
         $form = $this->createForm(InterrogerType::class, $interroger);
@@ -48,6 +51,9 @@ class InterrogerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $interroger->setSlug($this->getSlugger($interroger));
             $interrogerRepository->add($interroger);
+            $manager->persist($interroger);
+            $manager->flush();
+
             $this->addFlash("success","La création a été effectuée");
             return $this->redirectToRoute('app_interroger_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -55,6 +61,7 @@ class InterrogerController extends AbstractController
         return $this->render('interroger/new.html.twig', [
             'interroger' => $interroger,
             'form' => $form->createView(),
+
         ]);
     }
 
