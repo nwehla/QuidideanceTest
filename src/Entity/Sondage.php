@@ -24,11 +24,7 @@ class Sondage
      */
     private $titre;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $question;
-
+    
     /**
      * @ORM\Column(type="text", nullable=true)
      */
@@ -76,9 +72,16 @@ class Sondage
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Interroger::class, mappedBy="sondage")
+     */
+    private $question;
+    
+
     public function __construct()
     {
         $this->reponse = new ArrayCollection();
+        $this->question = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,18 +101,7 @@ class Sondage
         return $this;
     }
 
-    public function getQuestion(): ?string
-    {
-        return $this->question;
-    }
-
-    public function setQuestion(?string $question): self
-    {
-        $this->question = $question;
-
-        return $this;
-    }
-
+    
     public function getDescription(): ?string
     {
         return $this->description;
@@ -236,4 +228,34 @@ class Sondage
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Interroger>
+     */
+    public function getQuestion(): Collection
+    {
+        return $this->question;
+    }
+
+    public function addQuestion(Interroger $question): self
+    {
+        if (!$this->question->contains($question)) {
+            $this->question[] = $question;
+            $question->setSondage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Interroger $question): self
+    {
+        if ($this->question->removeElement($question)) {
+            // set the owning side to null (unless already changed)
+            if ($question->getSondage() === $this) {
+                $question->setSondage(null);
+            }
+        }
+
+        return $this;
+    }    
 }

@@ -5,8 +5,14 @@ namespace App\Form;
 use DateTime;
 use App\Entity\Reponse;
 use App\Entity\Sondage;
+use App\Entity\Categories;
 use App\Entity\Interroger;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormInterface;
+use Doctrine\Common\Collections\Collection;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,6 +24,11 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class SondageType extends AbstractType
 {
+    public function getQuestion(): Collection
+    {
+        return $this->question;
+    }
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -28,15 +39,23 @@ class SondageType extends AbstractType
                 'placeholder' => 'Entrez le titre du sondage',
                 ],
                 ])
-            // ->add('question',TextareaType::class, [
-            //     'label' => 'Question :',
-               
-            //     'attr' => [
-            //     'placeholder' => 'Entrez la question',
-            //     'rows' => 10,
-            //     'cols' => 20,
-            //     ],
+            ->add('categorie', EntityType::class, [
+                'mapped' => false,
+                'class' => Categories::class,
+                'choice_label' => 'titre',
+                'label' => 'Catégorie'
+            ])
+            ->add('interroger', EntityType::class, [
+                'mapped' => false,
+                'class' => Interroger::class,
+                'choice_label' => 'intitule',
+                'label' => 'Question'
+            ])
+            // ->add('question',ChoiceType::class, [
+            //     'label' => 'Question (Sélectionner une catégorie)',
+            //     'placeholder' => 'Sélectionner une question'
             //     ])
+
             ->add('description',TextareaType::class, [
                 'label' => 'Description du sondange :',
                 'required' => false,
@@ -98,7 +117,27 @@ class SondageType extends AbstractType
                 'rows' => 10,
                 'cols' => 20,
                 ],
-            ]);          
+            ]);
+
+            $formModifier = function(FormInterface $form, Categories $categorie = null){
+                $question = (null === $categorie) ? [] : $categorie->getInterrogers();
+                $form->add('question', EntityType::class, [
+                    'class' => Interroger::class,
+                    'choices' => $question,
+                    'choice_label' => 'intitule',
+                    'placeholder' => 'Catégorie (choisir une catégorie)',
+                    'label' => 'Question'
+                ]);
+            };
+            
+            $builder->get('categorie')->addEventListener(
+                FormEvents::POST_SUBMIT,
+                function (FormEvent $event) use ($formModifier){
+                    $categorie = $event->getForm()->getData();
+                    $formModifier($event->getForm()->getParent(), $categorie);
+
+                }
+            );
 
 
             // ->add('datecreation',DateTime::class, [

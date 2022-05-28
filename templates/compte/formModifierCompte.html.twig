@@ -17,4 +17,50 @@
         {{ form_end(formModifierCompte)}}
         
     </div>
+{# 
+    <div class="row no-gutters">
+        {% for ut in utilisateurs %}
+        <div class="col-12 col-lg-4 p-1">
+            <div class="card md-3">
+                <div class="row no-gutters align-items-center p-2">
+                        <div class="col col-md-4">
+                                    photo:
+                                    {{ut.photo}} 
+                                </div>
+                    <div class="col">
+                        <div class="card-body">
+        <h5 class="class-title">
+                                            {{ut.nom}}
+                                            {{ut.prenom}}
+                                        </h5>                    
+                        <p class="card-text">
+                               <div>Adresse:
+                                                {{ut.adresse}}
+                                            </div>
+                                            <div>Email:
+                                                {{ut.email}}
+                                            </div>
+                                            <div>Civilité:
+                                                {{ut.civilite}}</div>
+                                            <div>Role:
+                                                {% for ro in ut.roles %}
+                                                    {{ ro }}
+                                                {% endfor %}
+                                            </div>
+                                            <div>Status:
+                                                {{ut.status}}</div>
+                                        </p>
+                                        <p class="class-info">
+                                            <div><a href="{{ path('uti_affiche', {'id':ut.id})}} " class="btn btn-info">Informations !</a>
+                                            </div>
+                                            <div><a href="{{ path('edit_utilisateur', {'id':ut.id})}} "class="btn btn-warning">Modifier!</a>
+                                            </div>
+                                            <div><a href="{{ path('suppr_utilisateur', {'id':ut.id})}}"class="btn btn-danger">Supprimer!</a>
+                                            </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div> #}
+        
 {% endblock %}

@@ -39,7 +39,7 @@
         {% for sondage in sondages %}
             <tr>
                 <td>{{ sondage.titre }}</td>
-                <td>{{ sondage.question }}</td>
+                {# <td>{{ sondage.question }}</td> #}
                 <td>{{ sondage.description }}</td>
                 <td>{{ sondage.multiple ? 'Yes' : 'No' }}</td>
                 

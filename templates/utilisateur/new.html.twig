@@ -3,16 +3,19 @@
 {% block title %}Nouvel admin{% endblock %}
 
 {% block content %}
-<div class="py-3">
-    <a href="{{ path('app_utilisateur_index') }}" class="btn btn-primary mt-3">Retour au tableau admin</a>
-
-</div>
-    <div class="jumbotron text-center py-3">
-        <h1>Ajout d'un nouvel admin</h1>
-    </div>
+<div class="container py-3">
     <div class="py-3">
-        {{ include('utilisateur/_form.html.twig') }}
-
+        <a href="{{ path('app_utilisateur_index') }}" class="btn btn-primary mt-3 btn-outline-primary">Retour au tableau admin</a>
+    
     </div>
+        <div class="jumbotron text-center py-3">
+            <h1>Ajout d'un nouvel admin</h1>
+        </div>
+        <div class="py-3 width 30%">
+            {{ include('utilisateur/_form.html.twig') }}
+    
+        </div>
+    
+</div>
 
 {% endblock %}

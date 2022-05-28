@@ -34,6 +34,16 @@ class Interroger
      */
     private $categorie;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Sondage::class, mappedBy="question")
+     */
+    private $sondages;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Sondage::class, inversedBy="question")
+     */
+    private $sondage;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
@@ -92,7 +102,20 @@ class Interroger
 
         return $this;
     }
-    
+
+    public function getSondage(): ?Sondage
+    {
+        return $this->sondage;
+    }
+
+    public function setSondage(?Sondage $sondage): self
+    {
+        $this->sondage = $sondage;
+
+        return $this;
+    }
+
+       
 
    
    }
