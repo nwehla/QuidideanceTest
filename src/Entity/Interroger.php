@@ -39,14 +39,11 @@ class Interroger
      */
     private $sondages;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Sondage::class, inversedBy="question")
-     */
-    private $sondage;
-
+   
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
+        $this->sondages = new ArrayCollection();
     }
 
     
@@ -103,19 +100,34 @@ class Interroger
         return $this;
     }
 
-    public function getSondage(): ?Sondage
+    /**
+     * @return Collection<int, Sondage>
+     */
+    public function getSondages(): Collection
     {
-        return $this->sondage;
+        return $this->sondages;
     }
 
-    public function setSondage(?Sondage $sondage): self
+    public function addSondage(Sondage $sondage): self
     {
-        $this->sondage = $sondage;
+        if (!$this->sondages->contains($sondage)) {
+            $this->sondages[] = $sondage;
+            $sondage->setQuestion($this);
+        }
 
         return $this;
     }
 
-       
+    public function removeSondage(Sondage $sondage): self
+    {
+        if ($this->sondages->removeElement($sondage)) {
+            // set the owning side to null (unless already changed)
+            if ($sondage->getQuestion() === $this) {
+                $sondage->setQuestion(null);
+            }
+        }
 
-   
-   }
+        return $this;
+    }
+
+       }

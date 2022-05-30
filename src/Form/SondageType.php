@@ -45,12 +45,18 @@ class SondageType extends AbstractType
                 'choice_label' => 'titre',
                 'label' => 'Catégorie'
             ])
-            ->add('interroger', EntityType::class, [
-                'mapped' => false,
-                'class' => Interroger::class,
-                'choice_label' => 'intitule',
-                'label' => 'Question'
-            ])
+            // ->add('interroger', EntityType::class, [
+            //     'mapped' => false,
+            //     'multiple'=>false,
+            //     'class' => Interroger::class,
+            //     'choice_label' => 'intitule',
+            //     'label' => 'Question'
+            // ])
+            ->add('question',ChoiceType::class, [
+                'label' => 'Question (Sélectionner une catégorie)',
+                'placeholder' => 'Sélectionner une question'
+                ])
+
             // ->add('question',ChoiceType::class, [
             //     'label' => 'Question (Sélectionner une catégorie)',
             //     'placeholder' => 'Sélectionner une question'

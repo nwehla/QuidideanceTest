@@ -73,15 +73,14 @@ class Sondage
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=Interroger::class, mappedBy="sondage")
+     * @ORM\ManyToOne(targetEntity=Interroger::class, inversedBy="sondages")
      */
     private $question;
-    
 
+   
     public function __construct()
     {
         $this->reponse = new ArrayCollection();
-        $this->question = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,33 +228,17 @@ class Sondage
         return $this;
     }
 
-    /**
-     * @return Collection<int, Interroger>
-     */
-    public function getQuestion(): Collection
+    public function getQuestion(): ?Interroger
     {
         return $this->question;
     }
 
-    public function addQuestion(Interroger $question): self
+    public function setQuestion(?Interroger $question): self
     {
-        if (!$this->question->contains($question)) {
-            $this->question[] = $question;
-            $question->setSondage($this);
-        }
+        $this->question = $question;
 
         return $this;
     }
 
-    public function removeQuestion(Interroger $question): self
-    {
-        if ($this->question->removeElement($question)) {
-            // set the owning side to null (unless already changed)
-            if ($question->getSondage() === $this) {
-                $question->setSondage(null);
-            }
-        }
-
-        return $this;
-    }    
+       
 }
