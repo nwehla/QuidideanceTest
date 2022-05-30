@@ -55,8 +55,8 @@ class SondageType extends AbstractType
             ->add('question',ChoiceType::class, [
                 'label' => 'Question (Sélectionner une catégorie)',
                 'placeholder' => 'Sélectionner une question'
-                ])
-
+                ])           
+        
             // ->add('question',ChoiceType::class, [
             //     'label' => 'Question (Sélectionner une catégorie)',
             //     'placeholder' => 'Sélectionner une question'
@@ -132,6 +132,7 @@ class SondageType extends AbstractType
                     'choices' => $question,
                     'choice_label' => 'intitule',
                     'placeholder' => 'Catégorie (choisir une catégorie)',
+                    'attr' => ['class' => 'custom-select'],
                     'label' => 'Question'
                 ]);
             };
@@ -141,7 +142,6 @@ class SondageType extends AbstractType
                 function (FormEvent $event) use ($formModifier){
                     $categorie = $event->getForm()->getData();
                     $formModifier($event->getForm()->getParent(), $categorie);
-
                 }
             );
 

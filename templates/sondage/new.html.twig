@@ -27,7 +27,7 @@
             let form = this.closest("form");
             console.log(form)
 ;            //envoie du formulaire en ajax
-            let data = this.intitule + "=" + this.value;
+            let data = this.titre + "=" + this.value;
             
             fetch(form.action, {
                 method: form.getAttribute("method"),
@@ -44,7 +44,10 @@
                 content.innerHTML = html;
                 let nouveauSelect = content.querySelector("#sondage_question");
                 document.querySelector("#sondage_question").replaceWith(nouveauSelect);
-            });
+            })
+            .catch(error => {
+                    console.log(error);
+            })
         });
     }
 </script>   
